@@ -11,23 +11,35 @@ public class SimpleMapGridCreation : MonoBehaviour {
     //tiles can be removed as it is only being used for testing
     GameObject[,] tiles;
     //map layout the to is the button on the game screen
+    //0 indicates flat ground
+    //2 indicates a hole/pit in the ground
+    //3 indicates a pillar
+    int mapSizeX = 10;
+    int mapSizeY = 8;
     int[,] map = {
-                   { 3, 0, 0, 0, 0, 0, 0, 0, 0, 3},
+                   { 0, 3, 0, 0, 0, 0, 0, 0, 0, 0},
+                   { 0, 0, 0, 0, 0, 2, 0, 0, 0, 0},
+                   { 0, 0, 0, 0, 0, 0, 0, 0, 3, 0},
                    { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-                   { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-                   { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-                   { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-                   { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-                   { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-                   { 2, 0, 0, 0, 0, 0, 0, 0, 0, 2},
+                   { 0, 0, 0, 0, 0, 0, 0, 2, 0, 0},
+                   { 0, 3, 0, 0, 0, 0, 0, 0, 0, 0},
+                   { 0, 0, 2, 0, 0, 0, 0, 0, 0, 3},
+                   { 0, 0, 0, 0, 0, 2, 0, 0, 0, 0},
     };
 
     void Start(){
-        environmentObjects = new GameObject[10, 8];
-        tiles = new GameObject[10, 8];
-        for (int i = 0; i < 10; i++){
-            for (int j = 0; j < 8; j++){
-                tiles[i , j] = Instantiate(Tile, new Vector3(i, 0, j), Quaternion.identity) as GameObject;
+        environmentObjects = new GameObject[mapSizeX, mapSizeY];
+        tiles = new GameObject[mapSizeX, mapSizeY];
+        generateMapGridWithObstacles();
+    }
+
+    void generateMapGridWithObstacles()
+    {
+        for (int i = 0; i < mapSizeX; i++)
+        {
+            for (int j = 0; j < mapSizeY; j++)
+            {
+                tiles[i, j] = Instantiate(Tile, new Vector3(i, 0, j), Quaternion.identity) as GameObject;
                 if (map[j, i] == 0)
                 {
                     tiles[i, j].transform.parent = gameObject.transform;
@@ -42,7 +54,7 @@ public class SimpleMapGridCreation : MonoBehaviour {
                     environmentObjects[i, j].transform.parent = gameObject.transform;
                     tiles[i, j].transform.parent = gameObject.transform;
                 }
-                if (map[j,i] == 3)
+                if (map[j, i] == 3)
                 {
                     environmentObjects[i, j] = Instantiate(pillarObstacle, new Vector3(i, 0.25f, j), Quaternion.identity);
                     environmentObjects[i, j].transform.parent = gameObject.transform;
