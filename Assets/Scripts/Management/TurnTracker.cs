@@ -6,9 +6,20 @@ public class TurnTracker : MonoBehaviour {
 
     bool playerTookTurn;
 
+    public GameObject[] enemies;
+    int numberOfEnemies;
+    int enemiesWhoHasTakesTheirTurn;
+
+    ProjectileTracker projectiles;
+
 	// Use this for initialization
 	void Start () {
         playerTookTurn = false;
+        enemies = GameObject.FindGameObjectsWithTag("ENEMY");
+        numberOfEnemies = enemies.Length;
+        enemiesWhoHasTakesTheirTurn = 0;
+
+        projectiles = GameObject.Find("ProjectileTracker").GetComponent<ProjectileTracker>();
 	}
 	
     public bool GetTurnBool()
@@ -16,8 +27,20 @@ public class TurnTracker : MonoBehaviour {
         return playerTookTurn;
     }
 
-    public void TurnChange()
+    public void PlayerTakeTurn()
     {
-        playerTookTurn = !playerTookTurn;
+        playerTookTurn = true;
+        projectiles.MoveProjectiles();
+    }
+
+    public void EnemiesTakeTurns()
+    {
+        enemiesWhoHasTakesTheirTurn++;
+
+        if (enemiesWhoHasTakesTheirTurn == numberOfEnemies)
+        {
+            enemiesWhoHasTakesTheirTurn = 0;
+            playerTookTurn = false;
+        }
     }
 }

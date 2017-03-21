@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BasicMovement : MonoBehaviour {
+public class MeleeMovement: MonoBehaviour {
 
     TurnTracker turnTracker;
+    MeleeBasic attackScript;
+    UnitStats stats;
 
     Vector3 movement;
     
@@ -13,6 +15,9 @@ public class BasicMovement : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         turnTracker = this.GetComponentInParent<TurnTracker>();
+        attackScript = this.GetComponent<MeleeBasic>();
+        stats = this.GetComponent<UnitStats>();
+
         player = GameObject.Find("Player");
 	}
 	
@@ -22,13 +27,22 @@ public class BasicMovement : MonoBehaviour {
         {
             float desiredMovement_X = player.transform.position.x - transform.position.x;
             float desiredMovement_Z = player.transform.position.z - transform.position.z;
+            float rawX = Mathf.Abs(desiredMovement_X);
+            float rawY = Mathf.Abs(desiredMovement_Z);
 
             if (desiredMovement_X > 1) desiredMovement_X = 1;
             if (desiredMovement_Z > 1) desiredMovement_Z = 1;
             if (desiredMovement_X < -1) desiredMovement_X = -1;
             if (desiredMovement_Z < -1) desiredMovement_Z = -1;
 
-            if (Mathf.Abs(desiredMovement_X) == Mathf.Abs(desiredMovement_Z))
+            if (Mathf.Abs(rawX) + Mathf.Abs(rawY) <= 2 || attackScript.GetAttackStatus())
+            {
+                attackScript.Attack();
+                movement = new Vector3(0, 0, 0);
+            }
+
+
+            else if (Mathf.Abs(desiredMovement_X) == Mathf.Abs(desiredMovement_Z))
             {
                 if(Random.Range(0, 2) == 1) movement = new Vector3(desiredMovement_X, 0, 0);
                 else movement = new Vector3(0, 0, desiredMovement_Z);
@@ -36,8 +50,8 @@ public class BasicMovement : MonoBehaviour {
             else if (Mathf.Abs(desiredMovement_X) > Mathf.Abs(desiredMovement_Z)) movement = new Vector3(desiredMovement_X, 0, 0);
             else movement = new Vector3(0, 0, desiredMovement_Z);
 
-            transform.position += movement;
-            turnTracker.TurnChange();
+            transform.position += movement * stats.movementSpeed;
+            turnTracker.EnemiesTakeTurns();
         }
 	}
 }
