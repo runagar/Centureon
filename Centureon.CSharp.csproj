@@ -5,7 +5,7 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{4C768E6F-D780-9D21-05D2-3CAA02B13751}</ProjectGuid>
+    <ProjectGuid>{1E33FE4B-5307-B0CD-D253-CBB449C6DDB5}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AssemblyName>Assembly-CSharp</AssemblyName>
     <FileAlignment>512</FileAlignment>
@@ -221,17 +221,9 @@
     <Compile Include="Assets\3rd Party\2DxFX\Scripts\_2dxFX_Wave.cs" />
     <Compile Include="Assets\3rd Party\2DxFX\Scripts\_2dxFX_WoodFX.cs" />
     <Compile Include="Assets\Prefabs\placeholder.cs" />
-    <Compile Include="Assets\Scripts\Behaviours\Enemies\Attack\MeleeBasic.cs" />
-    <Compile Include="Assets\Scripts\Behaviours\Enemies\Attack\RangedBasic.cs" />
-    <Compile Include="Assets\Scripts\Behaviours\Enemies\EnemyTypes\UnitStats.cs" />
-    <Compile Include="Assets\Scripts\Behaviours\Enemies\Movement\MeleeMovement.cs" />
-    <Compile Include="Assets\Scripts\Behaviours\Enemies\Movement\RangedMovement.cs" />
-    <Compile Include="Assets\Scripts\Behaviours\Player\Attack\BasicMelee.cs" />
-    <Compile Include="Assets\Scripts\Behaviours\Player\Movement\SimpleMovement.cs" />
-    <Compile Include="Assets\Scripts\Behaviours\Player\PlayerStats.cs" />
-    <Compile Include="Assets\Scripts\Behaviours\Projectiles\Projectile.cs" />
-    <Compile Include="Assets\Scripts\Management\ProjectileTracker.cs" />
     <Compile Include="Assets\Scripts\Management\TurnTracker.cs" />
+    <Compile Include="Assets\Scripts\Movement\Enemy\BasicMovement.cs" />
+    <Compile Include="Assets\Scripts\Movement\Player\SimpleMovement.cs" />
     <Compile Include="Assets\Scripts\SimpleMapGridCreation.cs" />
     <Compile Include="Assets\breathFirst.cs" />
   </ItemGroup>
@@ -379,6 +371,5 @@
     <None Include="Assets\3rd Party\2DxFX\Resources\_2dxFX_Wave.shader" />
     <None Include="Assets\3rd Party\2DxFX\Resources\_2dxFX_WoodFX.shader" />
   </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <Target Name="GenerateTargetFrameworkMonikerAttribute" />
+  <Import Project="$(MSBuildExtensionsPath)\SyntaxTree\UnityVS\2015\UnityVS.CSharp.targets" />
 </Project>
