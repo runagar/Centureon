@@ -9,14 +9,14 @@ public class SimpleMapGridCreation : MonoBehaviour {
 
     GameObject[,] environmentObjects;
     //tiles can be removed as it is only being used for testing
-    GameObject[,] tiles;
+    public GameObject[,] tiles;
     //map layout the to is the button on the game screen
     //0 indicates flat ground
     //2 indicates a hole/pit in the ground
     //3 indicates a pillar
-    int mapSizeX = 10;
-    int mapSizeY = 8;
-    int[,] map = {
+    public int mapSizeX = 10;
+    public int mapSizeY = 8;
+    /*public int[,] map = {
                    { 0, 3, 0, 0, 0, 0, 0, 0, 0, 0},
                    { 0, 0, 0, 0, 0, 2, 0, 0, 0, 0},
                    { 0, 0, 0, 0, 0, 0, 0, 0, 3, 0},
@@ -25,6 +25,17 @@ public class SimpleMapGridCreation : MonoBehaviour {
                    { 0, 3, 0, 0, 0, 0, 0, 0, 0, 0},
                    { 0, 0, 2, 0, 0, 0, 0, 0, 0, 3},
                    { 0, 0, 0, 0, 0, 2, 0, 0, 0, 0},
+    };*/
+
+    public int[,] map = {
+                   { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+                   { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+                   { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+                   { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+                   { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+                   { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+                   { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+                   { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
     };
 
     void Start(){
