@@ -22,13 +22,13 @@ public class RTII : MonoBehaviour {
         {
             sideTemp = deltaSideWays / 60;
            // _rotation += new Vector3( 0,sideTemp * _rotationSensitivity,0);
-            transform.rotation = transform.rotation * Quaternion.Euler(sideTemp, 0, 0);
+            transform.rotation = transform.rotation * Quaternion.Euler(sideTemp, transform.eulerAngles.y, 0);
         }
         if(Mathf.Abs(deltaFrontWays) > 50)
         {
             frontTemp = deltaFrontWays / 60;
             //  _rotation += new Vector3(frontTemp * _rotationSensitivity,0,0);
-            transform.rotation = transform.rotation * Quaternion.Euler(0, frontTemp, 0);
+            transform.rotation = transform.rotation * Quaternion.Euler(transform.eulerAngles.x, frontTemp, 0);
         }
 
         transform.eulerAngles = new Vector3(transform.eulerAngles.x, transform.eulerAngles.y, 0);
