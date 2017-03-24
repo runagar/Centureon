@@ -30,7 +30,7 @@ public class RTII : MonoBehaviour {
             _rotation.x += deltaFrontWays * _rotationSensitivity;
         }
 
-        if (transform.rotation.x < -15)
+
 
     }
 }

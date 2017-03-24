@@ -26,7 +26,7 @@ public class BaseMovement : MonoBehaviour {
         if (stats.isRanged) rangedAttack = this.GetComponent<EnemyRanged>();
         else meleeAttack = this.GetComponent<EnemyMelee>();
 
-        player = GameObject.Find("Player");
+        player = GameObject.FindGameObjectWithTag("PLAYER");
     }
 
     //Method called in the TurnTracker script after the player has taken his turn

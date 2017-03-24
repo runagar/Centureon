@@ -9,7 +9,7 @@ public class ProjectileTracker : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        player = GameObject.Find("Player").GetComponent<PlayerStats>();
+        player = GameObject.FindGameObjectWithTag("PLAYER").GetComponent<PlayerStats>();
     }
 
     public void MoveProjectiles()
