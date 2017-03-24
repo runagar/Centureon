@@ -193,6 +193,7 @@
      <Compile Include="Assets\3rd Party\2DxFX\Scripts\_2dxFX_WoodFX.cs" />
      <Compile Include="Assets\Prefabs\placeholder.cs" />
      <Compile Include="Assets\Scripts\Management\TurnTracker.cs" />
+     <Compile Include="Assets\Scripts\MouseOver.cs" />
      <Compile Include="Assets\Scripts\Movement\Enemy\BasicMovement.cs" />
      <Compile Include="Assets\Scripts\Movement\Player\SimpleMovement.cs" />
      <None Include="Assets\3rd Party\2DxFX\Resources\_2dxFX_GrayScale.shader" />

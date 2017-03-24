@@ -26,28 +26,28 @@ public class SimpleMovement : MonoBehaviour {
             movement = new Vector3(0, 0, 1);
             transform.position += movement;
             timeSinceLastMove = 0;
-            turnTracker.TurnChange();
+            turnTracker.PlayerTakeTurn();
         }
         if (Input.GetButtonDown("DOWN") && timeSinceLastMove > 0.05)
         {
             movement = new Vector3(0, 0, -1);
             transform.position += movement;
             timeSinceLastMove = 0;
-            turnTracker.TurnChange();
+            turnTracker.PlayerTakeTurn();
         }
         if (Input.GetButtonDown("LEFT") && timeSinceLastMove > 0.05)
         {
             movement = new Vector3(-1, 0, 0);
             transform.position += movement;
             timeSinceLastMove = 0;
-            turnTracker.TurnChange();
+            turnTracker.PlayerTakeTurn();
         }
         if (Input.GetButtonDown("RIGHT") && timeSinceLastMove > 0.05)
         {
             movement = new Vector3(1, 0, 0);
             transform.position += movement;
             timeSinceLastMove = 0;
-            turnTracker.TurnChange();
+            turnTracker.PlayerTakeTurn();
         }
     }
 }
