@@ -224,6 +224,7 @@
     <Compile Include="Assets\Scripts\Management\TurnTracker.cs" />
     <Compile Include="Assets\Scripts\Movement\Enemy\BasicMovement.cs" />
     <Compile Include="Assets\Scripts\Movement\Player\SimpleMovement.cs" />
+    <Compile Include="Assets\Scripts\RTII.cs" />
     <Compile Include="Assets\Scripts\SimpleMapGridCreation.cs" />
     <Compile Include="Assets\breathFirst.cs" />
   </ItemGroup>

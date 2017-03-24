@@ -16,7 +16,7 @@ public class SimpleMapGridCreation : MonoBehaviour {
     //3 indicates a pillar
     public int mapSizeX = 10;
     public int mapSizeY = 8;
-    /*public int[,] map = {
+    public int[,] map = {
                    { 0, 3, 0, 0, 0, 0, 0, 0, 0, 0},
                    { 0, 0, 0, 0, 0, 2, 0, 0, 0, 0},
                    { 0, 0, 0, 0, 0, 0, 0, 0, 3, 0},
@@ -25,18 +25,18 @@ public class SimpleMapGridCreation : MonoBehaviour {
                    { 0, 3, 0, 0, 0, 0, 0, 0, 0, 0},
                    { 0, 0, 2, 0, 0, 0, 0, 0, 0, 3},
                    { 0, 0, 0, 0, 0, 2, 0, 0, 0, 0},
-    };*/
-
+    };
+    /*
     public int[,] map = {
                    { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
                    { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
                    { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
                    { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
                    { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+                   { 0, 0, 0, 0, 0, 0, 0, 0, 10, 0},
                    { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
                    { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-                   { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-    };
+    };*/
 
     void Start(){
         environmentObjects = new GameObject[mapSizeX, mapSizeY];
@@ -46,30 +46,30 @@ public class SimpleMapGridCreation : MonoBehaviour {
 
     void generateMapGridWithObstacles()
     {
-        for (int i = 0; i < mapSizeX; i++)
-        {
-            for (int j = 0; j < mapSizeY; j++)
-            {
-                tiles[i, j] = Instantiate(Tile, new Vector3(i, 0, j), Quaternion.identity) as GameObject;
-                if (map[j, i] == 0)
+        for (int y = 0; y < mapSizeY; y++){
+            for (int x = 0; x < mapSizeX; x++){
+                tiles[x, y] = Instantiate(Tile, new Vector3(x, 0, y), Quaternion.identity) as GameObject;
+                if (map[y, x] == 0)
                 {
-                    tiles[i, j].transform.parent = gameObject.transform;
+                    tiles[x, y].transform.parent = gameObject.transform;
                 }
-                if (map[j, i] == 1)
+                if (map[y, x] == 1)
                 {
-                    tiles[i, j].transform.parent = gameObject.transform;
+                    tiles[x, y].transform.parent = gameObject.transform;
                 }
-                if (map[j, i] == 2)
+                if (map[y, x] == 2)
                 {
-                    environmentObjects[i, j] = Instantiate(pits, new Vector3(i, 0.05f, j), Quaternion.identity);
-                    environmentObjects[i, j].transform.parent = gameObject.transform;
-                    tiles[i, j].transform.parent = gameObject.transform;
+                    environmentObjects[x, y] = Instantiate(pits, new Vector3(x, 0.05f, y), Quaternion.identity);
+                    environmentObjects[x, y].transform.parent = gameObject.transform;
+                    tiles[x, y].GetComponent<Renderer>().material.color = Color.gray;
+                    tiles[x, y].transform.parent = gameObject.transform;
                 }
-                if (map[j, i] == 3)
+                if (map[y, x] == 3)
                 {
-                    environmentObjects[i, j] = Instantiate(pillarObstacle, new Vector3(i, 0.25f, j), Quaternion.identity);
-                    environmentObjects[i, j].transform.parent = gameObject.transform;
-                    tiles[i, j].transform.parent = gameObject.transform;
+                    environmentObjects[x, y] = Instantiate(pillarObstacle, new Vector3(x, 0.25f, y), Quaternion.identity);
+                    tiles[x, y].GetComponent<Renderer>().material.color = Color.gray;
+                    environmentObjects[x, y].transform.parent = gameObject.transform;
+                    tiles[x, y].transform.parent = gameObject.transform;
                 }
             }
         }

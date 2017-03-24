@@ -6,8 +6,6 @@ public class breathFirst : MonoBehaviour {
     Vector2[,] parentList;
     int[,] myMap;
     List<Vector2> q;
-    List<Vector2> burned;
-
 
     SimpleMapGridCreation map;
     GameObject mapGrid;
@@ -18,6 +16,7 @@ public class breathFirst : MonoBehaviour {
         map = mapGrid.GetComponent<SimpleMapGridCreation>();
         myMap = map.map;
 
+        parentList = new Vector2[10,8];
         q = new List<Vector2>();
         getPath(new Vector2(2, 2));
     }
@@ -43,32 +42,33 @@ public class breathFirst : MonoBehaviour {
                 break;
             }
 
-
-            if (!burned.Contains(q[0])) { 
             if(q[0].x > 0 && (myMap[(int)q[0].x - 1, (int)q[0].y] == 0))
             {
                 parentList[(int)q[0].x-1, (int)q[0].y] = new Vector2(q[0].x, q[0].y);
                 q.Add(new Vector2(q[0].x - 1, q[0].y));
+                myMap[(int)q[0].x - 1, (int)q[0].y] = 4;
             }
             if (q[0].x < map.mapSizeX - 1 && (myMap[(int)q[0].x + 1, (int)q[0].y] ==0))
             {
                 parentList[(int)q[0].x + 1, (int)q[0].y] = new Vector2(q[0].x, q[0].y);
                 q.Add(new Vector2(q[0].x + 1, q[0].y));
+                myMap[(int)q[0].x + 1, (int)q[0].y] = 4;
             }
             if(q[0].y > 0 && (myMap[(int)q[0].x, (int)q[0].y - 1] == 0))
             {
                 parentList[(int)q[0].x, (int)q[0].y - 1] = new Vector2(q[0].x, q[0].y);
                 q.Add(new Vector2(q[0].x, q[0].y - 1));
+                myMap[(int)q[0].x, (int)q[0].y - 1] = 4;
             }
             if(q[0].y < map.mapSizeY && (myMap[(int)q[0].x, (int)q[0].y + 1] == 0))
             {
                 parentList[(int)q[0].x, (int)q[0].y + 1] = new Vector2(q[0].x, q[0].y);
                 q.Add(new Vector2(q[0].x, q[0].y + 1));
+                myMap[(int)q[0].x, (int)q[0].y + 1] = 4;
             }
-            burned.Add(q[0]);
+            Debug.Log(q.Count);
             q.RemoveAt(0);
             }
         }
     }
 
-}
