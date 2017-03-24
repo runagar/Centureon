@@ -3,34 +3,43 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class RTII : MonoBehaviour {
-    public float _frontRigthLeg;
-    public float _frontLeftLeg;
-    public float _backRightLeg;
-    public float _backLeftLeg;
+    public float _backLeftLeg, _backRightLeg, _frontLeftLeg,_frontRigthLeg;
 
-    float _legDifferenceAB, _legDifferenceAC, _legDifferenceBD, _legDifferenceCD;
     private Vector3 _rotation;
-    private float _rotationSensitivity;
-    float deltaSideWays, deltaFrontWays;
+    private float _rotationSensitivity, sideTemp, frontTemp;
+    public float deltaSideWays, deltaFrontWays;
     void Start () {
-        _rotationSensitivity = 0.2f;
+        _rotationSensitivity = 0.06f;
 	}
 	
 	void Update () {
         deltaSideWays = (_frontLeftLeg + _backLeftLeg) - (_frontRigthLeg + _backRightLeg);
         deltaFrontWays = (_frontRigthLeg + _frontLeftLeg) - (_backRightLeg + _backLeftLeg);
-        _rotation = Vector3.zero;
+      //  _rotation = Vector3.zero;
+        transform.rotation = transform.rotation * Quaternion.Euler(0, 0, 0); ;
+
         if (Mathf.Abs(deltaSideWays) > 50)
         {
-            //we lean right
-            _rotation.y += deltaSideWays * _rotationSensitivity;
+            sideTemp = deltaSideWays / 60;
+           // _rotation += new Vector3( 0,sideTemp * _rotationSensitivity,0);
+            transform.rotation = transform.rotation * Quaternion.Euler(sideTemp, 0, 0);
         }
         if(Mathf.Abs(deltaFrontWays) > 50)
         {
-            _rotation.x += deltaFrontWays * _rotationSensitivity;
+            frontTemp = deltaFrontWays / 60;
+            //  _rotation += new Vector3(frontTemp * _rotationSensitivity,0,0);
+            transform.rotation = transform.rotation * Quaternion.Euler(0, frontTemp, 0);
         }
 
-        if (transform.rotation.x < -15)
+        transform.eulerAngles = new Vector3(transform.eulerAngles.x, transform.eulerAngles.y, 0);
 
+        if (transform.eulerAngles.x < -15)
+            transform.eulerAngles = new Vector3(-15, transform.eulerAngles.y, 0);
+        if (transform.eulerAngles.x > 15)
+            transform.eulerAngles = new Vector3(15, transform.eulerAngles.y, 0);
+        if (transform.eulerAngles.y < -15)
+            transform.eulerAngles = new Vector3(transform.eulerAngles.x, -15, 0);
+        if (transform.eulerAngles.y > 15)
+            transform.eulerAngles = new Vector3(transform.eulerAngles.x, 15, 0);
     }
 }
