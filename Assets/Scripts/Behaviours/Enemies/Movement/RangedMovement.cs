@@ -4,8 +4,7 @@ using UnityEngine;
 
 public class RangedMovement: MonoBehaviour {
 
-    TurnTracker turnTracker;
-    RangedBasic attackScript;
+    EnemyRanged attackScript;
     UnitStats stats;
 
     Vector3 movement;
@@ -14,8 +13,7 @@ public class RangedMovement: MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-        turnTracker = this.GetComponentInParent<TurnTracker>();
-        attackScript = this.GetComponent<RangedBasic>();
+        attackScript = this.GetComponent<EnemyRanged>();
         stats = this.GetComponent<UnitStats>();
 
         player = GameObject.Find("Player");
@@ -23,8 +21,6 @@ public class RangedMovement: MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if (turnTracker.GetTurnBool())
-        {
             float desiredMovement_X = player.transform.position.x - transform.position.x;
             float desiredMovement_Z = player.transform.position.z - transform.position.z;
 
@@ -49,7 +45,6 @@ public class RangedMovement: MonoBehaviour {
             else movement = new Vector3(0, 0, desiredMovement_Z);
 
             transform.position += movement * stats.movementSpeed;
-            turnTracker.EnemiesTakeTurns();
-        }
+        
 	}
 }

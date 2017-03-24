@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MeleeBasic : MonoBehaviour {
+public class EnemyMelee : MonoBehaviour {
 
     bool isChargingAttack;
 
@@ -11,18 +11,14 @@ public class MeleeBasic : MonoBehaviour {
         isChargingAttack = false;
 	}
 	
-	public void Attack()
+	public void ChargeAttack()
     {
-        if (isChargingAttack)
-        {
-            isChargingAttack = false;
-            Debug.Log("BASH!");
-        }
-        else
-        {
-            isChargingAttack = true;
-            Debug.Log("HIYYY...");
-        }
+
+    }
+
+    public void ConcludeAttack()
+    {
+
     }
 
     public bool GetAttackStatus()

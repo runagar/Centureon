@@ -5,7 +5,7 @@ using UnityEngine;
 public class MeleeMovement: MonoBehaviour {
 
     TurnTracker turnTracker;
-    MeleeBasic attackScript;
+
     UnitStats stats;
 
     Vector3 movement;
@@ -15,7 +15,6 @@ public class MeleeMovement: MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         turnTracker = this.GetComponentInParent<TurnTracker>();
-        attackScript = this.GetComponent<MeleeBasic>();
         stats = this.GetComponent<UnitStats>();
 
         player = GameObject.Find("Player");
@@ -23,8 +22,7 @@ public class MeleeMovement: MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if (turnTracker.GetTurnBool())
-        {
+
             float desiredMovement_X = player.transform.position.x - transform.position.x;
             float desiredMovement_Z = player.transform.position.z - transform.position.z;
             float rawX = Mathf.Abs(desiredMovement_X);
@@ -35,9 +33,8 @@ public class MeleeMovement: MonoBehaviour {
             if (desiredMovement_X < -1) desiredMovement_X = -1;
             if (desiredMovement_Z < -1) desiredMovement_Z = -1;
 
-            if (Mathf.Abs(rawX) + Mathf.Abs(rawY) <= 2 || attackScript.GetAttackStatus())
+            if (Mathf.Abs(rawX) + Mathf.Abs(rawY) <= 2 )
             {
-                attackScript.Attack();
                 movement = new Vector3(0, 0, 0);
             }
 
@@ -52,6 +49,6 @@ public class MeleeMovement: MonoBehaviour {
 
             transform.position += movement * stats.movementSpeed;
             turnTracker.EnemiesTakeTurns();
-        }
+        
 	}
 }

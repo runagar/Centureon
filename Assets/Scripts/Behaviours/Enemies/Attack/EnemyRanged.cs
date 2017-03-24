@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RangedBasic : MonoBehaviour {
+public class EnemyRanged : MonoBehaviour {
 
     UnitStats stats;
 
