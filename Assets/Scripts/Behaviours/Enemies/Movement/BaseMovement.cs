@@ -14,25 +14,28 @@ public class BaseMovement : MonoBehaviour {
     GameObject player;
 
     //Cache floats that hold differences in position
-    float desiredMove_X, desiredMove_Z, absDelta_X, absDelta_Z;
+    public float desiredMove_X, desiredMove_Z, absDelta_X, absDelta_Z;
 
     //Cache necessities for movement
     List<Vector3> possibleRangedPositions;
     Vector3 movementVector;
     SimpleMapGridCreation gridScript;
     int[,] map;
+    int attackRange;
 
 
 	void Start () {
         //Reference the cached scripts and objects
         stats = this.gameObject.GetComponent<UnitStats>();
-		mySpriteRenderer = GameObject.Find("SpriteEnemy").GetComponentInParent<SpriteRenderer>();
+        mySpriteRenderer = transform.FindChild("SpriteEnemy").GetComponent<SpriteRenderer>();
         if (stats.isRanged) rangedAttack = this.GetComponent<EnemyRanged>();
         else meleeAttack = this.GetComponent<EnemyMelee>();
 
         player = GameObject.FindGameObjectWithTag("PLAYER");
         gridScript = GameObject.Find("MapLayout").GetComponent<SimpleMapGridCreation>();
         map = gridScript.map;
+
+        attackRange = stats.range;
     }
 
     //Method called in the TurnTracker script after the player has taken his turn
@@ -85,7 +88,7 @@ public class BaseMovement : MonoBehaviour {
 		}
 
         //If the manhatten-distance to the player is <= 2 (meaning either adjacent to player, or a player-adjacent square)
-        else if (absDelta_X + absDelta_Z <= 2)
+        else if (absDelta_X + absDelta_Z <= (1 + 1 * attackRange))
         {
             //we do not move but attack a adjcent square instead
             movementVector = new Vector3(0, 0, 0);
@@ -93,22 +96,22 @@ public class BaseMovement : MonoBehaviour {
             for(int i = -1; i < 2; i++){
                 for(int j = -1; j < 2; j++)
                 {
-                    if(desiredMove_X == i && desiredMove_Z == j)
+                    if(desiredMove_X == i * (1 + attackRange) && desiredMove_Z == j * (1 + attackRange))
                     {
                         if(absDelta_X == absDelta_Z)
                         {
                             switch (Random.Range(0, 2))
                             {
                                 case 0:
-                                    meleeAttack.ChargeAttack(new Vector3(i, 0, 0));
+                                    meleeAttack.ChargeAttack(new Vector3(i * attackRange, 0, 0));
                                     break;
                                 case 1:
-                                    meleeAttack.ChargeAttack(new Vector3(0, 0, j));
+                                    meleeAttack.ChargeAttack(new Vector3(0, 0, j * attackRange));
                                     break;
                             }
                             break;
                         }
-                        meleeAttack.ChargeAttack(new Vector3(i, 0, j));
+                        meleeAttack.ChargeAttack(new Vector3(i * attackRange, 0, j * attackRange));
                         break;
                     }
                 }
