@@ -12,6 +12,7 @@ public class PlayerMovement : MonoBehaviour
     Vector3 movement;
     public Vector2 currentPos;
     float timeSinceLastMove;
+	public SpriteRenderer mySpriteRenderer;
 
 
     // Use this for initialization
@@ -19,7 +20,7 @@ public class PlayerMovement : MonoBehaviour
     {
         turnTracker = this.GetComponentInParent<TurnTracker>();
         mapLayout = GameObject.Find("MapLayout").GetComponent<SimpleMapGridCreation>();
-
+		mySpriteRenderer = GameObject.Find("Sprite").GetComponentInParent<SpriteRenderer>();
         timeSinceLastMove = 0;
     }
 
@@ -40,10 +41,12 @@ public class PlayerMovement : MonoBehaviour
             if (Input.GetButtonDown("LEFT") && timeSinceLastMove > 0.05)
             {
                 MovePlayerPiece("x-1");
+
             }
             if (Input.GetButtonDown("RIGHT") && timeSinceLastMove > 0.05)
             {
                 MovePlayerPiece("x1");
+
             }
     }
 
@@ -76,17 +79,19 @@ public class PlayerMovement : MonoBehaviour
                 if (mapLayout.map[(int)currentPos.y, (int)currentPos.x - 1] != 0) break;
                 else
                 {
+					mySpriteRenderer.flipX = true;
                     movement = new Vector3(-1, 0, 0);
                     transform.position += movement;
                     timeSinceLastMove = 0;
                     turnTracker.PlayerTakeTurn();
-                    break;
+					break;
                 }
 
             case "x1":
                 if (mapLayout.map[(int)currentPos.y, (int)currentPos.x + 1] != 0) break;
                 else
                 {
+					mySpriteRenderer.flipX = false;
                     movement = new Vector3(1, 0, 0);
                     transform.position += movement;
                     timeSinceLastMove = 0;

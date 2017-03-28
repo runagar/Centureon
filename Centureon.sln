@@ -1,7 +1,7 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2015
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Centureon", "Centureon.csproj", "{4C768E6F-D780-9D21-05D2-3CAA02B13751}"
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Centureon", "Assembly-CSharp.csproj", "{1F99E77D-6D7E-8495-2C76-29ED9B680472}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -9,12 +9,15 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{4C768E6F-D780-9D21-05D2-3CAA02B13751}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{4C768E6F-D780-9D21-05D2-3CAA02B13751}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{4C768E6F-D780-9D21-05D2-3CAA02B13751}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{4C768E6F-D780-9D21-05D2-3CAA02B13751}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1F99E77D-6D7E-8495-2C76-29ED9B680472}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1F99E77D-6D7E-8495-2C76-29ED9B680472}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1F99E77D-6D7E-8495-2C76-29ED9B680472}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1F99E77D-6D7E-8495-2C76-29ED9B680472}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(MonoDevelopProperties) = preSolution
+		StartupItem = Assembly-CSharp.csproj
 	EndGlobalSection
 EndGlobal
