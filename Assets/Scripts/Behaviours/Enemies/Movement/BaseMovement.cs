@@ -66,9 +66,7 @@ public class BaseMovement : MonoBehaviour {
             rangedAttack.ChargeAttack(player.transform.position - transform.position);
             movementVector = new Vector3(0, 0, 0);
 
-            /* ------------------------------------- 
-            Insert Actual Pathfinding here.
-            ------------------------------------*/
+            
 
             //Move the enemy by the path.
             transform.position += movementVector * stats.movementSpeed;
@@ -92,86 +90,34 @@ public class BaseMovement : MonoBehaviour {
             //we do not move but attack a adjcent square instead
             movementVector = new Vector3(0, 0, 0);
 
-            //if the player is to the left of the enemy
-            if (absDelta_X == -1 && absDelta_Z == 0)
-            {
-                meleeAttack.ChargeAttack(new Vector3(-1, 0, 0));
-            }
-            //if the player is to the right of the enemy
-            else if (absDelta_X == 1 && absDelta_Z == 0)
-            {
-                meleeAttack.ChargeAttack(new Vector3(1, 0, 0));
-            }
-            //if the player is below the enemy
-            else if (absDelta_X == 0 && absDelta_Z == -1)
-            {
-                meleeAttack.ChargeAttack(new Vector3(0, 0, -1));
-            }
-            //if the player is to the above of the enemy
-            else if (absDelta_X == 0 && absDelta_Z == 1) {
-                meleeAttack.ChargeAttack(new Vector3(0, 0, 1));
-            }
-            //if the player is to the left and below the enemy
-            else if (absDelta_X == -1 && absDelta_Z == -1)
-            {
-                switch (Random.Range(0, 2))
+            for(int i = -1; i < 2; i++){
+                for(int j = -1; j < 2; j++)
                 {
-                    case 0:
-                        meleeAttack.ChargeAttack(new Vector3(-1, 0, 0));
+                    if(desiredMove_X == i && desiredMove_Z == j)
+                    {
+                        if(absDelta_X == absDelta_Z)
+                        {
+                            switch (Random.Range(0, 2))
+                            {
+                                case 0:
+                                    meleeAttack.ChargeAttack(new Vector3(i, 0, 0));
+                                    break;
+                                case 1:
+                                    meleeAttack.ChargeAttack(new Vector3(0, 0, j));
+                                    break;
+                            }
+                            break;
+                        }
+                        meleeAttack.ChargeAttack(new Vector3(i, 0, j));
                         break;
-                    case 1:
-                        meleeAttack.ChargeAttack(new Vector3(0, 0, -1));
-                        break;
+                    }
                 }
             }
-            //if the player is to the left and above the enemy
-            else if (absDelta_X == -1 && absDelta_Z == 1)
-            {
-                switch (Random.Range(0, 2))
-                {
-                    case 0:
-                        meleeAttack.ChargeAttack(new Vector3(-1, 0, 0));
-                        break;
-                    case 1:
-                        meleeAttack.ChargeAttack(new Vector3(0, 0, 1));
-                        break;
-                }
-            }
-            //if the player is to the right and below the enemy
-            else if (absDelta_X == 1 && absDelta_Z == -1)
-            {
-                switch (Random.Range(0, 2))
-                {
-                    case 0:
-                        meleeAttack.ChargeAttack(new Vector3(1, 0, 0));
-                        break;
-                    case 1:
-                        meleeAttack.ChargeAttack(new Vector3(0, 0, -1));
-                        break;
-                }
-            }
-            //if the player is to the right and above the player
-            else if (absDelta_X == 1 && absDelta_Z == 1)
-            {
-                switch (Random.Range(0, 2)) {
-                    case 0:
-                        meleeAttack.ChargeAttack(new Vector3(1, 0, 0));
-                        break;
-                    case 1:
-                        meleeAttack.ChargeAttack(new Vector3(0, 0, 1));
-                        break;
-                }
-                
-            }
-
         }
         else
         {
             Vector2 start = new Vector2(transform.position.x, transform.position.z);
             Vector2 goal = new Vector2(player.transform.position.x, player.transform.position.z);
-
-            Debug.Log(start + ", " + goal);
-
             Vector2 tempMovement = pathfinding(start, goal)[0];
 
             movementVector = new Vector3(tempMovement.x, 0, tempMovement.y) - transform.position;
