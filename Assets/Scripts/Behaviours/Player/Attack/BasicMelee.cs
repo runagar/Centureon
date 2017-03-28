@@ -26,13 +26,12 @@ public class BasicMelee : MonoBehaviour {
             {
                 if(turnTracker.enemies[i] != null && turnTracker.enemies[i].transform.position.z == transform.position.z + 1)
                 {
+                    turnTracker.enemies[i].GetComponent<UnitStats>().isKill = "yes";
                     Destroy(turnTracker.enemies[i]);
-                    turnTracker.enemies[i] = null;
                     turnTracker.PlayerTakeTurn();
                     break;
                 }
             }
-            
         }
         if (Input.GetButtonDown("AttackDown"))
         {
@@ -40,8 +39,8 @@ public class BasicMelee : MonoBehaviour {
             {
                 if (turnTracker.enemies[i] != null && turnTracker.enemies[i].transform.position.z == transform.position.z - 1)
                 {
+                    turnTracker.enemies[i].GetComponent<UnitStats>().isKill = "yes";
                     Destroy(turnTracker.enemies[i]);
-                    turnTracker.enemies[i] = null;
                     turnTracker.PlayerTakeTurn();
                     break;
                 }
@@ -53,8 +52,8 @@ public class BasicMelee : MonoBehaviour {
             {
                 if (turnTracker.enemies[i] != null && turnTracker.enemies[i].transform.position.x == transform.position.x - 1)
                 {
+                    turnTracker.enemies[i].GetComponent<UnitStats>().isKill = "yes";
                     Destroy(turnTracker.enemies[i]);
-                    turnTracker.enemies[i] = null;
                     turnTracker.PlayerTakeTurn();
                     break;
                 }
@@ -66,8 +65,8 @@ public class BasicMelee : MonoBehaviour {
             {
                 if (turnTracker.enemies[i] != null && turnTracker.enemies[i].transform.position.x == transform.position.x + 1)
                 {
+                    turnTracker.enemies[i].GetComponent<UnitStats>().isKill = "yes";
                     Destroy(turnTracker.enemies[i]);
-                    turnTracker.enemies[i] = null;
                     turnTracker.PlayerTakeTurn();
                     break;
                 }

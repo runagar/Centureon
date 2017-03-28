@@ -9,4 +9,5 @@ public class UnitStats : MonoBehaviour {
     public int movementSpeed;
     public int projectileSpeed;
     public int range;
+    public string isKill;
 }

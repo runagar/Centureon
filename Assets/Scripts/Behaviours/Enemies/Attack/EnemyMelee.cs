@@ -27,12 +27,12 @@ public class EnemyMelee : MonoBehaviour {
 
     public void ConcludeAttack()
     {
-        if (player != null) {
+        if (player != null && stats.isKill == "no") {
 
             Vector2 p = new Vector2(player.transform.position.x, player.transform.position.z);
             Vector2 a = new Vector2(this.transform.position.x + attackDirection.x, this.transform.position.z + attackDirection.z);
 
-            if (p == a) {
+            if (p == a && this.gameObject != null) {
                 Destroy(player.gameObject);
             }
         }
