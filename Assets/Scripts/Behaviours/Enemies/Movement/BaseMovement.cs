@@ -12,11 +12,13 @@ public class BaseMovement : MonoBehaviour {
     //Cache the player gameobject
     GameObject player;
 
-    //Cache floats that hold differences in position between 
+    //Cache floats that hold differences in position
     float desiredMove_X, desiredMove_Z, absDelta_X, absDelta_Z;
 
-    //Cache vector for change in movement
+    //Cache necessities for movement
     Vector3 movementVector;
+    SimpleMapGridCreation gridScript;
+    int[,] map;
 
 
 	void Start () {
@@ -27,6 +29,8 @@ public class BaseMovement : MonoBehaviour {
         else meleeAttack = this.GetComponent<EnemyMelee>();
 
         player = GameObject.FindGameObjectWithTag("PLAYER");
+        gridScript = GameObject.Find("MapLayout").GetComponent<SimpleMapGridCreation>();
+        map = gridScript.map;
     }
 
     //Method called in the TurnTracker script after the player has taken his turn
@@ -87,12 +91,78 @@ public class BaseMovement : MonoBehaviour {
             meleeAttack.ChargeAttack();
             movementVector = new Vector3(0, 0, 0);
         }
+        else
+        {
+            Vector2 start = new Vector2(transform.position.x, transform.position.z);
+            Vector2 goal = new Vector2(player.transform.position.x, player.transform.position.z);
 
-        /* ------------------------------------- 
-            Insert Actual Pathfinding here.
-            ------------------------------------*/
-        
+            Debug.Log(start + ", " + goal);
+
+            Vector2 tempMovement = pathfinding(start, goal)[0];
+
+            movementVector = new Vector3(tempMovement.x, 0, tempMovement.y) - transform.position;
+        }
+
         //Move the enemy by the path.
-        transform.position += movementVector * stats.movementSpeed;
+        transform.position += movementVector;
+    }
+
+    //The pathfinding algorithm. Breadth first.
+    List<Vector2> pathfinding(Vector2 start, Vector2 goal)
+    {
+        List<Vector2> open = new List<Vector2>();                                   //List of nodes we have not yet looked at
+        List<Vector2> burned = new List<Vector2>();                                 //List of nodes we have already looked at
+        List<Vector2> path = new List<Vector2>();                                   //Vector holds the destination we want to go to (out return value)
+        Vector2[,] parents = new Vector2[gridScript.mapSizeX, gridScript.mapSizeY]; //2D array hold the parents for each location
+
+        //Add the start node to the open list
+        open.Add(start);
+        Vector2 current;
+
+        while(open.Count > 0)
+        {
+            //Set our current node to the first in the open list, and save x and y coordinates of the current pos for ease of reference
+            current = open[0];
+            int x = (int)current.x;
+            int y = (int)current.y;
+
+            //if we have found the shortest route to the goal
+            if (current == goal)
+            {
+                while(current != start)
+                {
+                    path.Insert(0, current);
+                    current = parents[(int)current.x, (int)current.y];
+                }
+                break;
+            }
+
+            //Go through the four neighbouring tiles
+            for(int i = -1; i < 2; i++){
+                for (int j = -1; j < 2; j++)
+                {
+                    if (Mathf.Abs(i) == Mathf.Abs(j)) continue;
+                    else if (x + i >= 0 && x + i < gridScript.mapSizeX && y + j >= 0 && y + j < gridScript.mapSizeY)
+                    {
+                        //Assign the neighbour pos we are looking at as a temporary vector.
+                        Vector2 temp = new Vector2(x + i, y + j);
+
+                        //If that neighbour is neither in the open list nor the burned list
+                        if (!open.Contains(temp) && !burned.Contains(temp) && map[(int)temp.y, (int)temp.x] == 0)
+                        {
+                            //Add it to the open list, and define which pos we came to here from.
+                            open.Add(temp);
+                            parents[(int)temp.x, (int)temp.y] = current;
+                        }
+                    }
+                }
+            }
+
+            //Burn the current pos, and remove it from the open list.
+            burned.Add(current);
+            open.RemoveAt(0);
+        }
+        
+        return path;
     }
 }

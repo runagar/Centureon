@@ -15,7 +15,7 @@ public class SimpleMapGridCreation : MonoBehaviour {
     //2 indicates a hole/pit in the ground
     //3 indicates a pillar
     public int mapSizeX = 10;
-    public int mapSizeY = 8;
+    public int mapSizeY = 10;
     public int[,] map = {
                    { 0, 3, 0, 0, 0, 0, 0, 0, 0, 0},
                    { 0, 0, 0, 0, 0, 2, 0, 0, 0, 0},
@@ -23,6 +23,8 @@ public class SimpleMapGridCreation : MonoBehaviour {
                    { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
                    { 0, 0, 0, 0, 0, 0, 0, 2, 0, 0},
                    { 0, 3, 0, 0, 0, 0, 0, 0, 0, 0},
+                   { 0, 0, 2, 0, 0, 0, 0, 0, 0, 3},
+                   { 0, 0, 0, 0, 0, 2, 0, 0, 0, 0},
                    { 0, 0, 2, 0, 0, 0, 0, 0, 0, 3},
                    { 0, 0, 0, 0, 0, 2, 0, 0, 0, 0},
     };
