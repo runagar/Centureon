@@ -102,16 +102,16 @@ public class BaseMovement : MonoBehaviour {
             {
                 meleeAttack.ChargeAttack(new Vector3(1, 0, 0));
             }
-            //if the player is above the enemy
+            //if the player is below the enemy
             else if (absDelta_X == 0 && absDelta_Z == -1)
             {
                 meleeAttack.ChargeAttack(new Vector3(0, 0, -1));
             }
-            //if the player is to the below of the enemy
+            //if the player is to the above of the enemy
             else if (absDelta_X == 0 && absDelta_Z == 1) {
                 meleeAttack.ChargeAttack(new Vector3(0, 0, 1));
             }
-            //if the player is to the left and above the enemy
+            //if the player is to the left and below the enemy
             else if (absDelta_X == -1 && absDelta_Z == -1)
             {
                 switch (Random.Range(0, 2))
@@ -124,7 +124,7 @@ public class BaseMovement : MonoBehaviour {
                         break;
                 }
             }
-            //if the player is to the left and below the enemy
+            //if the player is to the left and above the enemy
             else if (absDelta_X == -1 && absDelta_Z == 1)
             {
                 switch (Random.Range(0, 2))
@@ -137,7 +137,7 @@ public class BaseMovement : MonoBehaviour {
                         break;
                 }
             }
-            //if the player is to the right and above the enemy
+            //if the player is to the right and below the enemy
             else if (absDelta_X == 1 && absDelta_Z == -1)
             {
                 switch (Random.Range(0, 2))
@@ -150,7 +150,7 @@ public class BaseMovement : MonoBehaviour {
                         break;
                 }
             }
-            //if the player is to the right and below the player
+            //if the player is to the right and above the player
             else if (absDelta_X == 1 && absDelta_Z == 1)
             {
                 switch (Random.Range(0, 2)) {
