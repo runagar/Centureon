@@ -1,7 +1,7 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/Behaviours/Enemies/Movement/BaseMovement.cs">
     <Files>
-      <File FileName="Assets/Scripts/Behaviours/Enemies/Movement/BaseMovement.cs" Line="128" Column="27" />
+      <File FileName="Assets/Scripts/Behaviours/Enemies/Movement/BaseMovement.cs" Line="129" Column="34" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
