@@ -17,6 +17,7 @@ public class BaseMovement : MonoBehaviour {
     float desiredMove_X, desiredMove_Z, absDelta_X, absDelta_Z;
 
     //Cache necessities for movement
+    List<Vector3> possibleRangedPositions;
     Vector3 movementVector;
     SimpleMapGridCreation gridScript;
     int[,] map;
@@ -193,5 +194,58 @@ public class BaseMovement : MonoBehaviour {
         }
         
         return path;
+    }
+
+    List<Vector3> desiredRangedPosition(GameObject player) {
+        List<Vector3> desiredPositions = new List<Vector3>();
+        List<Vector3> adjecentSquares = new List<Vector3>();
+        List<Vector3> possibleSquares = new List<Vector3>();
+        
+        for(int i = -1; i < 2; i++){
+            for(int j = -1; j < 2; j++){
+                if(Mathf.Abs(i) != Mathf.Abs(j))
+                {
+                    adjecentSquares.Add(new Vector3(player.transform.position.x + i, 0.25f, player.transform.position.z + j));
+                }
+            }
+        }
+
+         if (!Physics.Linecast(adjecentSquares[0], new Vector3(adjecentSquares[0].x, 0.25f, this.transform.position.z)))
+         {
+                desiredPositions.Add(new Vector3(adjecentSquares[0].x, 0.25f, this.transform.position.z));
+         }
+         if (!Physics.Linecast(adjecentSquares[0], new Vector3(this.transform.position.x, 0.25f, adjecentSquares[0].z)))
+         {
+                desiredPositions.Add(new Vector3( this.transform.position.x, 0.25f, adjecentSquares[0].z));
+         }
+
+        if (!Physics.Linecast(adjecentSquares[1], new Vector3(adjecentSquares[1].x, 0.25f, this.transform.position.z)))
+        {
+            desiredPositions.Add(new Vector3(adjecentSquares[1].x, 0.25f, this.transform.position.z));
+        }
+        if (!Physics.Linecast(adjecentSquares[1], new Vector3(this.transform.position.x, 0.25f, adjecentSquares[1].z)))
+        {
+            desiredPositions.Add(new Vector3(this.transform.position.x, 0.25f, adjecentSquares[1].z));
+        }
+
+        if (!Physics.Linecast(adjecentSquares[2], new Vector3(adjecentSquares[2].x, 0.25f, this.transform.position.z)))
+        {
+            desiredPositions.Add(new Vector3(adjecentSquares[2].x, 0.25f, this.transform.position.z));
+        }
+        if (!Physics.Linecast(adjecentSquares[2], new Vector3(this.transform.position.x, 0.25f, adjecentSquares[2].z)))
+        {
+            desiredPositions.Add(new Vector3(this.transform.position.x, 0.25f, adjecentSquares[2].z));
+        }
+
+        if (!Physics.Linecast(adjecentSquares[3], new Vector3(adjecentSquares[3].x, 0.25f, this.transform.position.z)))
+        {
+            desiredPositions.Add(new Vector3(adjecentSquares[3].x, 0.25f, this.transform.position.z));
+        }
+        if (!Physics.Linecast(adjecentSquares[3], new Vector3(this.transform.position.x, 0.25f, adjecentSquares[3].z)))
+        {
+            desiredPositions.Add(new Vector3(this.transform.position.x, 0.25f, adjecentSquares[3].z));
+        }
+        Debug.Log(desiredPositions.Count);
+        return desiredPositions;
     }
 }
