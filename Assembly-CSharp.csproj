@@ -196,11 +196,8 @@
      <Compile Include="Assets\Scripts\Behaviours\Enemies\Attack\EnemyRanged.cs" />
      <Compile Include="Assets\Scripts\Behaviours\Enemies\EnemyTypes\UnitStats.cs" />
      <Compile Include="Assets\Scripts\Behaviours\Enemies\Movement\BaseMovement.cs" />
-     <Compile Include="Assets\Scripts\Behaviours\Enemies\Movement\MeleeMovement.cs" />
-     <Compile Include="Assets\Scripts\Behaviours\Enemies\Movement\RangedMovement.cs" />
      <Compile Include="Assets\Scripts\Behaviours\Player\Attack\BasicMelee.cs" />
      <Compile Include="Assets\Scripts\Behaviours\Player\Movement\PlayerMovement.cs" />
-     <Compile Include="Assets\Scripts\Behaviours\Player\Movement\SimpleMovement.cs" />
      <Compile Include="Assets\Scripts\Behaviours\Player\PlayerStats.cs" />
      <Compile Include="Assets\Scripts\Behaviours\Projectiles\Projectile.cs" />
      <Compile Include="Assets\Scripts\Billboard.cs" />

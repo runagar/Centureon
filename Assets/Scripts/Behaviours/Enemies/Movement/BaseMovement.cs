@@ -8,6 +8,7 @@ public class BaseMovement : MonoBehaviour {
     UnitStats stats;
     EnemyRanged rangedAttack;
     EnemyMelee meleeAttack;
+	public SpriteRenderer mySpriteRenderer;
 
     //Cache the player gameobject
     GameObject player;
@@ -24,7 +25,7 @@ public class BaseMovement : MonoBehaviour {
 	void Start () {
         //Reference the cached scripts and objects
         stats = this.gameObject.GetComponent<UnitStats>();
-
+		mySpriteRenderer = GameObject.Find("SpriteEnemy").GetComponentInParent<SpriteRenderer>();
         if (stats.isRanged) rangedAttack = this.GetComponent<EnemyRanged>();
         else meleeAttack = this.GetComponent<EnemyMelee>();
 
@@ -64,9 +65,7 @@ public class BaseMovement : MonoBehaviour {
         {
             //Start charging attack, don't move.
             rangedAttack.ChargeAttack(player.transform.position - transform.position);
-            movementVector = new Vector3(0, 0, 0);
-
-            
+			movementVector = new Vector3(0, 0, 0);
 
             //Move the enemy by the path.
             transform.position += movementVector * stats.movementSpeed;
@@ -82,7 +81,7 @@ public class BaseMovement : MonoBehaviour {
             //Conclude that attack, don't move.
             meleeAttack.ConcludeAttack();
             movementVector = new Vector3(0, 0, 0);
-        }
+		}
 
         //If the manhatten-distance to the player is <= 2 (meaning either adjacent to player, or a player-adjacent square)
         else if (absDelta_X + absDelta_Z <= 2)
@@ -121,10 +120,20 @@ public class BaseMovement : MonoBehaviour {
             Vector2 tempMovement = pathfinding(start, goal)[0];
 
             movementVector = new Vector3(tempMovement.x, 0, tempMovement.y) - transform.position;
+
         }
 
-        //Move the enemy by the path.
+		//Move the enemy by the path.
+
+		if (movementVector.x == -1 || movementVector.z == -1)
+			mySpriteRenderer.flipX = true;
+		else
+			mySpriteRenderer.flipX = false;
+
         transform.position += movementVector;
+
+
+
     }
 
     //The pathfinding algorithm. Breadth first.
