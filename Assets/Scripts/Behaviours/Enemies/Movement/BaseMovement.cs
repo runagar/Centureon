@@ -32,6 +32,7 @@ public class BaseMovement : MonoBehaviour {
     //Method called in the TurnTracker script after the player has taken his turn
     public void TriggerMovement()
     {
+        if(player != null) { 
         //Calculate the delta position floats.
         desiredMove_X = player.transform.position.x - transform.position.x;
         desiredMove_Z = player.transform.position.z - transform.position.z;
@@ -40,7 +41,8 @@ public class BaseMovement : MonoBehaviour {
 
         //Call the correct movement method
         if (stats.isRanged) RangedMovement();
-        else MeleeMovement(); 
+        else MeleeMovement();
+        }
     }
 
     //Method for movement in the unit is ranged
@@ -83,9 +85,81 @@ public class BaseMovement : MonoBehaviour {
         //If the manhatten-distance to the player is <= 2 (meaning either adjacent to player, or a player-adjacent square)
         else if (absDelta_X + absDelta_Z <= 2)
         {
-            //Wind up to attack, don't move.
-            meleeAttack.ChargeAttack();
+            //we do not move but attack a adjcent square instead
             movementVector = new Vector3(0, 0, 0);
+
+            //if the player is to the left of the enemy
+            if (absDelta_X == -1 && absDelta_Z == 0)
+            {
+                meleeAttack.ChargeAttack(new Vector3(-1, 0, 0));
+            }
+            //if the player is to the right of the enemy
+            else if (absDelta_X == 1 && absDelta_Z == 0)
+            {
+                meleeAttack.ChargeAttack(new Vector3(1, 0, 0));
+            }
+            //if the player is above the enemy
+            else if (absDelta_X == 0 && absDelta_Z == -1)
+            {
+                meleeAttack.ChargeAttack(new Vector3(0, 0, -1));
+            }
+            //if the player is to the below of the enemy
+            else if (absDelta_X == 0 && absDelta_Z == 1) {
+                meleeAttack.ChargeAttack(new Vector3(0, 0, 1));
+            }
+            //if the player is to the left and above the enemy
+            else if (absDelta_X == -1 && absDelta_Z == -1)
+            {
+                switch (Random.Range(0, 2))
+                {
+                    case 0:
+                        meleeAttack.ChargeAttack(new Vector3(-1, 0, 0));
+                        break;
+                    case 1:
+                        meleeAttack.ChargeAttack(new Vector3(0, 0, -1));
+                        break;
+                }
+            }
+            //if the player is to the left and below the enemy
+            else if (absDelta_X == -1 && absDelta_Z == 1)
+            {
+                switch (Random.Range(0, 2))
+                {
+                    case 0:
+                        meleeAttack.ChargeAttack(new Vector3(-1, 0, 0));
+                        break;
+                    case 1:
+                        meleeAttack.ChargeAttack(new Vector3(0, 0, 1));
+                        break;
+                }
+            }
+            //if the player is to the right and above the enemy
+            else if (absDelta_X == 1 && absDelta_Z == -1)
+            {
+                switch (Random.Range(0, 2))
+                {
+                    case 0:
+                        meleeAttack.ChargeAttack(new Vector3(1, 0, 0));
+                        break;
+                    case 1:
+                        meleeAttack.ChargeAttack(new Vector3(0, 0, -1));
+                        break;
+                }
+            }
+            //if the player is to the right and below the player
+            else if (absDelta_X == 1 && absDelta_Z == 1)
+            {
+                switch (Random.Range(0, 2)) {
+                    case 0:
+                        meleeAttack.ChargeAttack(new Vector3(1, 0, 0));
+                        break;
+                    case 1:
+                        meleeAttack.ChargeAttack(new Vector3(0, 0, 1));
+                        break;
+                }
+                
+            }
+
         }
 
         /* ------------------------------------- 
