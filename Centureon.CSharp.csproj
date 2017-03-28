@@ -228,10 +228,12 @@
     <Compile Include="Assets\Scripts\Behaviours\Enemies\Movement\MeleeMovement.cs" />
     <Compile Include="Assets\Scripts\Behaviours\Enemies\Movement\RangedMovement.cs" />
     <Compile Include="Assets\Scripts\Behaviours\Player\Attack\BasicMelee.cs" />
+    <Compile Include="Assets\Scripts\Behaviours\Player\Movement\PlayerMovement.cs" />
     <Compile Include="Assets\Scripts\Behaviours\Player\Movement\SimpleMovement.cs" />
     <Compile Include="Assets\Scripts\Behaviours\Player\PlayerStats.cs" />
     <Compile Include="Assets\Scripts\Behaviours\Projectiles\Projectile.cs" />
     <Compile Include="Assets\Scripts\Management\ProjectileTracker.cs" />
+    <Compile Include="Assets\Scripts\Management\Spawner.cs" />
     <Compile Include="Assets\Scripts\Management\TurnTracker.cs" />
     <Compile Include="Assets\Scripts\MouseOver.cs" />
     <Compile Include="Assets\Scripts\RTII.cs" />
