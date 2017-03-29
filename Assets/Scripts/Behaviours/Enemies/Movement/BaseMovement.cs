@@ -116,7 +116,7 @@ public class BaseMovement : MonoBehaviour {
                     }
                 }
             }
-        }
+        } 
         else
         {
             Vector2 start = new Vector2(transform.position.x, transform.position.z);
