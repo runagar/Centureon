@@ -12,7 +12,7 @@ public class RTII : MonoBehaviour {
     private float _rotationSensitivity;
     public float deltaSideWays, deltaFrontWays;
     void Start () {
-        _rotationSensitivity = 0.05f;
+        _rotationSensitivity = 0.005f;
 	}
 	
 	void Update () {
@@ -39,18 +39,19 @@ public class RTII : MonoBehaviour {
         }
         else
         {
-            _rotation.x = Mathf.MoveTowards(_rotation.y, 0, Time.deltaTime);
+            _rotation.x = Mathf.MoveTowards(_rotation.x, 0, Time.deltaTime);
             
         }
 
         //""""""""""""
         //check if we are at the rotaion limit.
         //""""""""""""
-        transform.eulerAngles = new Vector3(transform.eulerAngles.x, transform.eulerAngles.y, 0);
-
+        
         if (transform.eulerAngles.x < -15) transform.eulerAngles = new Vector3(-15, transform.eulerAngles.y, 0);
         if (transform.eulerAngles.x > 15) transform.eulerAngles = new Vector3(15, transform.eulerAngles.y, 0);
         if (transform.eulerAngles.y < -15) transform.eulerAngles = new Vector3(transform.eulerAngles.x, -15, 0);
         if (transform.eulerAngles.y > 15) transform.eulerAngles = new Vector3(transform.eulerAngles.x, 15, 0);
+
+        transform.eulerAngles = new Vector3(transform.eulerAngles.x, transform.eulerAngles.y, 0);
     }
 }
