@@ -15,7 +15,8 @@ public class EnemyTelegraphs : MonoBehaviour {
     {
         foreach(Vector2 v in targetTiles)
         {
-            if (v.x >= 0 && v.x < gridScript.mapSizeX && v.y >= 0 && v.y < gridScript.mapSizeY) gridScript.tiles[(int)v.x, (int)v.y].GetComponent<Renderer>().material.color = Color.red;
+            if (v.x >= 0 && v.x < gridScript.mapSizeX && v.y >= 0 && v.y < gridScript.mapSizeY)
+                gridScript.tiles[(int)v.x, (int)v.y].GetComponent<Renderer>().material.color = Color.red;
         }
     }
 }

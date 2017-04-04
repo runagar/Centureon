@@ -7,11 +7,11 @@ public class EnemyMelee : MonoBehaviour {
 
     bool isChargingAttack;
 
-    Vector3 attackDirection;
+    public Vector3 attackDirection;
     GameObject player;
 
     EnemyTelegraphs telegraphScript;
-    List<Vector2> targetTiles;
+    public List<Vector2> targetTiles;
 
     // Use this for initialization
     void Start () {
@@ -50,11 +50,16 @@ public class EnemyMelee : MonoBehaviour {
         if (player != null && stats.isKill == "no") {
 
             Vector2 playerPos = new Vector2(player.transform.position.x, player.transform.position.z);
-            Vector2 attackPos = new Vector2(this.transform.position.x + attackDirection.x, this.transform.position.z + attackDirection.z);
 
-            if (playerPos == attackPos && this.gameObject != null) {
-                Destroy(player.gameObject);
+            foreach(Vector2 v in targetTiles)
+            {
+                if (v.x == playerPos.x && v.y == playerPos.y)
+                {
+                    Destroy(player.gameObject);
+                    break;
+                }  
             }
+            
         }
         isChargingAttack = false;
     }

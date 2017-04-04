@@ -108,15 +108,15 @@ public class BaseMovement : MonoBehaviour {
         //If the manhatten-distance to the player is <= 2 (meaning either adjacent to player, or a player-adjacent square)
         else if (absDelta_X + absDelta_Z <= (1 + 1 * attackRange))
         {
-            //we do not move but attack a adjcent square instead
+            //we do not move but attack an adjcent square instead
             movementVector = new Vector3(0, 0, 0);
 
             for(int i = -1; i < 2; i++){
                 for(int j = -1; j < 2; j++)
                 {
-                    if(desiredMove_X == i * (1 + attackRange) && desiredMove_Z == j * (1 + attackRange))
+                    if(Mathf.Sign(desiredMove_X) == Mathf.Sign(i) && Mathf.Sign(desiredMove_Z) == Mathf.Sign(j) && (i != 0 && j != 0))
                     {
-                        if(absDelta_X == absDelta_Z)
+                        if (absDelta_X == absDelta_Z)
                         {
                             switch (Random.Range(0, 2))
                             {
@@ -129,7 +129,11 @@ public class BaseMovement : MonoBehaviour {
                             }
                             break;
                         }
-                        meleeAttack.ChargeAttack(new Vector3(i * attackRange, 0, j * attackRange));
+                        if(absDelta_X < absDelta_Z)
+                        {
+                            meleeAttack.ChargeAttack(new Vector3(0, 0, j * attackRange));
+                        }
+                        else meleeAttack.ChargeAttack(new Vector3(i * attackRange, 0, 0));
                         break;
                     }
                 }
