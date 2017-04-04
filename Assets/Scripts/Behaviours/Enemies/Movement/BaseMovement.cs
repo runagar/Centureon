@@ -25,8 +25,12 @@ public class BaseMovement : MonoBehaviour {
     int[,] map;
     int attackRange;
 
+    TurnTracker turnTracker;
 
-	void Start () {
+    public int xBlocked;
+    public int zBlocked;
+
+    void Start () {
         //Reference the cached scripts and objects
         stats = this.gameObject.GetComponent<UnitStats>();
         mySpriteRenderer = transform.FindChild("SpriteEnemy").GetComponent<SpriteRenderer>();
@@ -37,6 +41,7 @@ public class BaseMovement : MonoBehaviour {
         gridScript = GameObject.Find("MapLayout").GetComponent<SimpleMapGridCreation>();
         map = gridScript.map;
 
+        turnTracker = GameObject.Find("TurnTracker").GetComponent<TurnTracker>();
 
         attackRange = stats.range;
     }
@@ -122,24 +127,24 @@ public class BaseMovement : MonoBehaviour {
                     if(Mathf.Sign(desiredMove_X) == Mathf.Sign(i) && Mathf.Sign(desiredMove_Z) == Mathf.Sign(j) && (i != 0 && j != 0))
                     {
                         //Ints for determining if positions are blocked
-                        int xBlocked = 0;
-                        int zBlocked = 0;
+                        xBlocked = 0;
+                        zBlocked = 0;
 
                         //based on the range of the unit, go through all the relevant tiles and check if they are blocked.
                         for (int r = 0; r < attackRange; r++)
                         {
-                            if (gridScript.map[(int)transform.position.x + (r + 1) * i, (int)transform.position.z] != 0 && xBlocked == 0) xBlocked = r + 1;
-                            if (gridScript.map[(int)transform.position.x, (int)transform.position.z + (r + 1) * j] != 0 && zBlocked == 0) zBlocked = r + 1;
+                            if (gridScript.map[(int)transform.position.z, (int)transform.position.x + (r + 1) * i] != 0 && xBlocked == 0) xBlocked = r + 1;
+                            if (gridScript.map[(int)transform.position.z + (r + 1) * j, (int)transform.position.x] != 0 && zBlocked == 0) zBlocked = r + 1;
                         }
+
+                        //If it is completely blocked in both directions
+                        if (xBlocked == 1 && zBlocked == 1) break;
 
                         //If the target is at a diagonal to the enemy
                         if (absDelta_X == absDelta_Z)
                         {
-                            //If it is completely blocked in both directions
-                            if (xBlocked == 1 && zBlocked == 1) break;
-
                             //If only blocked in the x direction, attack in the z-direction
-                            else if (xBlocked == 1 && zBlocked == 2)
+                            if (xBlocked == 1 && zBlocked == 2)
                             {
                                 meleeAttack.ChargeAttack(new Vector3(0, 0, j * attackRange));
                                 movementVector = new Vector3(0, 0, 0); //Set move to zero so we stay where we are.
@@ -247,6 +252,11 @@ public class BaseMovement : MonoBehaviour {
                         //If that neighbour is neither in the open list nor the burned list
                         if (!open.Contains(temp) && !burned.Contains(temp) && map[(int)temp.y, (int)temp.x] == 0)
                         {
+                            foreach(GameObject o in turnTracker.enemies)
+                            {
+                                if (temp.x == o.transform.position.z && temp.y == o.transform.position.x) continue;
+                            }
+
                             //Add it to the open list, and define which pos we came to here from.
                             open.Add(temp);
                             parents[(int)temp.x, (int)temp.y] = current;

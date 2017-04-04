@@ -234,6 +234,8 @@
     <Compile Include="Assets\Scripts\Management\ProjectileTracker.cs" />
     <Compile Include="Assets\Scripts\Management\Spawner.cs" />
     <Compile Include="Assets\Scripts\Management\TurnTracker.cs" />
+    <Compile Include="Assets\Scripts\Management\VictoryDefeatCondition.cs" />
+    <Compile Include="Assets\Scripts\Management\levelManager.cs" />
     <Compile Include="Assets\Scripts\MouseOver.cs" />
     <Compile Include="Assets\Scripts\RTII.cs" />
     <Compile Include="Assets\Scripts\SimpleMapGridCreation.cs" />
