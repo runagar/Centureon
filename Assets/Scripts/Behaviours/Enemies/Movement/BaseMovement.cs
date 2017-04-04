@@ -68,17 +68,30 @@ public class BaseMovement : MonoBehaviour {
         }
 
         Vector3 desiredPosition = desiredRangedPosition(player);
-
+        Debug.Log(desiredPosition);
         //If the unit is on the same X or Z coordinate as the player
         if (this.transform.position == desiredPosition)
         {
             //Start charging attack, don't move.
             rangedAttack.ChargeAttack(player.transform.position - transform.position);
 			movementVector = new Vector3(0, 0, 0);
-
-            //Move the enemy by the path.
-            transform.position += movementVector * stats.movementSpeed;
         }
+        else
+        {
+            Vector2 start = new Vector2(transform.position.x, transform.position.z);
+            Vector2 goal = new Vector2(desiredPosition.x, desiredPosition.z);
+            Vector2 tempMovement = pathfinding(start, goal)[0];
+
+            movementVector = new Vector3(tempMovement.x, 0, tempMovement.y) - transform.position;
+        }
+
+        //Move the enemy by the path.
+        if (movementVector.x == -1 || movementVector.z == -1)
+            mySpriteRenderer.flipX = true;
+        else
+            mySpriteRenderer.flipX = false;
+
+        transform.position += movementVector;
     }
 
     //Method for movement if the unit is melee
@@ -260,10 +273,11 @@ public class BaseMovement : MonoBehaviour {
         {
             hCost = ((v.x - this.transform.position.x) + (v.z - this.transform.position.z));
 
-            if (v.x == player.transform.position.x || v.z == player.transform.position.z) hCost =- 2;
+            if (v.x == player.transform.position.x || v.z == player.transform.position.z) { 
+                hCost = hCost - 2;
+            }
 
-            if(hCost < lowestHcost)
-            {
+            if (hCost < lowestHcost){
                 lowestHcost = hCost;
                 myDesiredPosition = v;
             }
