@@ -97,6 +97,12 @@ public class BaseMovement : MonoBehaviour {
     //Method for movement if the unit is melee
     void MeleeMovement()
     {
+        Vector2 start = new Vector2(transform.position.x, transform.position.z);
+        Vector2 goal = new Vector2(player.transform.position.x, player.transform.position.z);
+        Vector2 tempMovement = pathfinding(start, goal)[0];
+
+        movementVector = new Vector3(tempMovement.x, 0, tempMovement.y) - transform.position;
+
         //If the unit is winding up to attack
         if (meleeAttack.GetAttackStatus())
         {
@@ -108,49 +114,85 @@ public class BaseMovement : MonoBehaviour {
         //If the manhatten-distance to the player is <= 2 (meaning either adjacent to player, or a player-adjacent square)
         else if (absDelta_X + absDelta_Z <= (1 + 1 * attackRange))
         {
-            //we do not move but attack an adjcent square instead
-            movementVector = new Vector3(0, 0, 0);
-
+            
             for(int i = -1; i < 2; i++){
                 for(int j = -1; j < 2; j++)
                 {
+                    //if we found the i and j with the same sign as the desired direction, and they are not both zero
                     if(Mathf.Sign(desiredMove_X) == Mathf.Sign(i) && Mathf.Sign(desiredMove_Z) == Mathf.Sign(j) && (i != 0 && j != 0))
                     {
+                        //Ints for determining if positions are blocked
+                        int xBlocked = 0;
+                        int zBlocked = 0;
+
+                        //based on the range of the unit, go through all the relevant tiles and check if they are blocked.
+                        for (int r = 0; r < attackRange; r++)
+                        {
+                            if (gridScript.map[(int)transform.position.x + (r + 1) * i, (int)transform.position.z] != 0 && xBlocked == 0) xBlocked = r + 1;
+                            if (gridScript.map[(int)transform.position.x, (int)transform.position.z + (r + 1) * j] != 0 && zBlocked == 0) zBlocked = r + 1;
+                        }
+
+                        //If the target is at a diagonal to the enemy
                         if (absDelta_X == absDelta_Z)
                         {
-                            switch (Random.Range(0, 2))
+                            //If it is completely blocked in both directions
+                            if (xBlocked == 1 && zBlocked == 1) break;
+
+                            //If only blocked in the x direction, attack in the z-direction
+                            else if (xBlocked == 1 && zBlocked == 2)
                             {
-                                case 0:
-                                    meleeAttack.ChargeAttack(new Vector3(i * attackRange, 0, 0));
-                                    break;
-                                case 1:
-                                    meleeAttack.ChargeAttack(new Vector3(0, 0, j * attackRange));
-                                    break;
+                                meleeAttack.ChargeAttack(new Vector3(0, 0, j * attackRange));
+                                movementVector = new Vector3(0, 0, 0); //Set move to zero so we stay where we are.
+                                break;
+                            }
+                            //if only blocked in the z-direction, attack along x
+                            else if (xBlocked == 2 && zBlocked == 1)
+                            {
+                                meleeAttack.ChargeAttack(new Vector3(i * attackRange, 0, 0));
+                                movementVector = new Vector3(0, 0, 0);//Set move to zero so we stay where we are.
+                                break;
+                            }
+
+                            //if both ways are open, attack a random one.
+                            else
+                            {
+                                switch (Random.Range(0, 2))
+                                {
+                                    case 0:
+                                        meleeAttack.ChargeAttack(new Vector3(i * attackRange, 0, 0));
+                                        movementVector = new Vector3(0, 0, 0);//Set move to zero so we stay where we are.
+                                        break;
+                                    case 1:
+                                        meleeAttack.ChargeAttack(new Vector3(0, 0, j * attackRange));
+                                        movementVector = new Vector3(0, 0, 0);//Set move to zero so we stay where we are.
+                                        break;
+                                }
                             }
                             break;
                         }
+                        //if the target is closest to Z
                         if(absDelta_X < absDelta_Z)
                         {
-                            meleeAttack.ChargeAttack(new Vector3(0, 0, j * attackRange));
+                            //if z is not blocked, or it is blocked two tiles away, but the enemy is on the immediately adjacent tile
+                            if(zBlocked == 0 || (zBlocked == 2 && absDelta_X + absDelta_Z == 1))
+                            {
+                                meleeAttack.ChargeAttack(new Vector3(0, 0, j * attackRange));
+                                movementVector = new Vector3(0, 0, 0);//Set move to zero so we stay where we are.
+                            }
                         }
-                        else meleeAttack.ChargeAttack(new Vector3(i * attackRange, 0, 0));
+                        //if the target is closest to X and x is not blocked, or it is blocked two tiles away, but the enemy is on the immediately adjacent tile
+                        else if (xBlocked == 0 || (xBlocked == 2 && absDelta_X + absDelta_Z == 1))
+                        {
+                            meleeAttack.ChargeAttack(new Vector3(i * attackRange, 0, 0));
+                            movementVector = new Vector3(0, 0, 0);//Set move to zero so we stay where we are.
+                        }
                         break;
                     }
                 }
             }
         } 
-        else
-        {
-            Vector2 start = new Vector2(transform.position.x, transform.position.z);
-            Vector2 goal = new Vector2(player.transform.position.x, player.transform.position.z);
-            Vector2 tempMovement = pathfinding(start, goal)[0];
-
-            movementVector = new Vector3(tempMovement.x, 0, tempMovement.y) - transform.position;
-
-        }
 
 		//Move the enemy by the path.
-
 		if (movementVector.x == -1 || movementVector.z == -1)
 			mySpriteRenderer.flipX = true;
 		else
