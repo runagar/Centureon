@@ -223,6 +223,7 @@
     <Compile Include="Assets\Prefabs\placeholder.cs" />
     <Compile Include="Assets\Scripts\Behaviours\Enemies\Attack\EnemyMelee.cs" />
     <Compile Include="Assets\Scripts\Behaviours\Enemies\Attack\EnemyRanged.cs" />
+    <Compile Include="Assets\Scripts\Behaviours\Enemies\Attack\EnemyTelegraphs.cs" />
     <Compile Include="Assets\Scripts\Behaviours\Enemies\EnemyTypes\UnitStats.cs" />
     <Compile Include="Assets\Scripts\Behaviours\Enemies\Movement\BaseMovement.cs" />
     <Compile Include="Assets\Scripts\Behaviours\Player\Attack\BasicMelee.cs" />
@@ -233,6 +234,8 @@
     <Compile Include="Assets\Scripts\Management\ProjectileTracker.cs" />
     <Compile Include="Assets\Scripts\Management\Spawner.cs" />
     <Compile Include="Assets\Scripts\Management\TurnTracker.cs" />
+    <Compile Include="Assets\Scripts\Management\VictoryDefeatCondition.cs" />
+    <Compile Include="Assets\Scripts\Management\levelManager.cs" />
     <Compile Include="Assets\Scripts\MouseOver.cs" />
     <Compile Include="Assets\Scripts\RTII.cs" />
     <Compile Include="Assets\Scripts\SimpleMapGridCreation.cs" />

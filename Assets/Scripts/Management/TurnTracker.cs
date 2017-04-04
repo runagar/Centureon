@@ -5,7 +5,7 @@ using UnityEngine;
 public class TurnTracker : MonoBehaviour {
 
     bool playerTookTurn;
-
+    VictoryDefeatCondition VCcondition;
     public GameObject[] enemies;
 
     ProjectileTracker projectiles;
@@ -15,6 +15,7 @@ public class TurnTracker : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+        VCcondition = GameObject.Find("LevelManager").GetComponent<VictoryDefeatCondition>();
         projectiles = GameObject.Find("ProjectileTracker").GetComponent<ProjectileTracker>();
         gridScript = GameObject.Find("MapLayout").GetComponent<SimpleMapGridCreation>();
         baseColour = gridScript.Tile.GetComponent<Renderer>().sharedMaterial.color;
@@ -35,6 +36,7 @@ public class TurnTracker : MonoBehaviour {
 
     public void EnemiesTakeTurns()
     {
+        VCcondition.didPlayerMove = true;
         enemies = GameObject.FindGameObjectsWithTag("ENEMY");
         foreach (GameObject o in enemies)
         {

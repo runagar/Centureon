@@ -6,7 +6,7 @@ public class SimpleMapGridCreation : MonoBehaviour {
     public GameObject Tile;
     public GameObject pillarObstacle;
     public GameObject pits;
-
+    levelManager lvlManager;
     GameObject[,] environmentObjects;
     //tiles can be removed as it is only being used for testing
     public GameObject[,] tiles;
@@ -16,7 +16,8 @@ public class SimpleMapGridCreation : MonoBehaviour {
     //3 indicates a pillar
     public int mapSizeX = 10;
     public int mapSizeY = 10;
-    public int[,] map = {
+    public int[,] map;
+    public int[,] map1 = {
                    { 0, 3, 0, 0, 0, 0, 0, 0, 0, 0},
                    { 0, 0, 0, 0, 0, 2, 0, 0, 0, 0},
                    { 0, 0, 0, 0, 0, 0, 0, 0, 3, 0},
@@ -28,22 +29,43 @@ public class SimpleMapGridCreation : MonoBehaviour {
                    { 0, 0, 2, 0, 0, 0, 0, 0, 0, 3},
                    { 0, 0, 0, 0, 0, 2, 0, 0, 0, 0},
     };
-    /*
-    public int[,] map = {
+    public int[,] map2 = {
+                   { 0, 0, 0, 0, 0, 0, 0, 0, 2, 3},
+                   { 0, 0, 0, 0, 0, 0, 0, 0, 0, 2},
+                   { 2, 0, 0, 0, 0, 2, 0, 0, 0, 0},
+                   { 3, 2, 0, 0, 0, 3, 2, 0, 0, 0},
+                   { 3, 0, 0, 0, 2, 3, 0, 0, 0, 0},
+                   { 0, 0, 0, 0, 0, 2, 0, 0, 0, 2},
+                   { 0, 0, 0, 0, 0, 0, 0, 0, 2, 3},
+                   { 0, 3, 0, 0, 0, 0, 0, 2, 2, 3},
+                   { 0, 0, 0, 0, 0, 0, 2, 3, 3, 0},
+                   { 0, 0, 0, 0, 0, 2, 3, 0, 0, 0},
+    };
+    public int[,] map3 = {
+                   { 0, 0, 0, 0, 0, 0, 0, 0, 2, 3},
+                   { 0, 0, 0, 0, 0, 0, 0, 0, 0, 2},
+                   { 0, 0, 2, 3, 0, 0, 0, 0, 0, 0},
+                   { 0, 0, 0, 2, 0, 0, 0, 0, 0, 0},
                    { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+                   { 0, 0, 0, 0, 0, 0, 2, 0, 0, 0},
+                   { 0, 0, 0, 0, 0, 0, 3, 0, 0, 0},
+                   { 0, 0, 0, 0, 0, 2, 0, 2, 0, 0},
+                   { 0, 0, 2, 0, 0, 0, 0, 0, 0, 0},
                    { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-                   { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-                   { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-                   { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-                   { 0, 0, 0, 0, 0, 0, 0, 0, 10, 0},
-                   { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-                   { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-    };*/
+    };
 
     void Start(){
+        lvlManager = GameObject.Find("LevelManager").GetComponent<levelManager>();
+        int currentLevel = lvlManager.getCurrentLevel();
+        if(currentLevel == 0) map = map1;
+        if (currentLevel == 1) map = map2;
+        if (currentLevel == 2) map = map3;
+
+        //these need the map to generate
         environmentObjects = new GameObject[mapSizeX, mapSizeY];
         tiles = new GameObject[mapSizeX, mapSizeY];
         generateMapGridWithObstacles();
+
     }
 
     void generateMapGridWithObstacles()
