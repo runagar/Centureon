@@ -31,12 +31,15 @@ public class EnemyMelee : MonoBehaviour {
 
         targetTiles.Clear();
 
+        int x = (int)transform.position.x;
+        int z = (int)transform.position.z;
+
         for (int i = 0; i < stats.range; i++)
         {
-            if (attackDirection.x == 0 && Mathf.Sign(attackDirection.z) == -1) targetTiles.Add(new Vector2(0, -(i + 1)));
-            if (attackDirection.x == 0 && Mathf.Sign(attackDirection.z) == 1) targetTiles.Add(new Vector2(0, i + 1));
-            if (attackDirection.z == 0 && Mathf.Sign(attackDirection.x) == -1) targetTiles.Add(new Vector2(-(i + 1), 0));
-            if (attackDirection.z == 0 && Mathf.Sign(attackDirection.x) == 1) targetTiles.Add(new Vector2((i + 1), 0));
+            if (attackDirection.x == 0 && Mathf.Sign(attackDirection.z) == -1) targetTiles.Add(new Vector2(x, -(i + 1) + z));
+            if (attackDirection.x == 0 && Mathf.Sign(attackDirection.z) == 1) targetTiles.Add(new Vector2(x, i + 1 + z));
+            if (attackDirection.z == 0 && Mathf.Sign(attackDirection.x) == -1) targetTiles.Add(new Vector2(-(i + 1) + x, z));
+            if (attackDirection.z == 0 && Mathf.Sign(attackDirection.x) == 1) targetTiles.Add(new Vector2(i + 1 + x, z));
         }
 
         telegraphScript.startTelegraph(targetTiles);
@@ -53,18 +56,6 @@ public class EnemyMelee : MonoBehaviour {
                 Destroy(player.gameObject);
             }
         }
-        targetTiles.Clear();
-
-        for (int i = 0; i < stats.range; i++)
-        {
-            if (attackDirection.x == 0 && Mathf.Sign(attackDirection.z) == -1) targetTiles.Add(new Vector2(0, -(i + 1)));
-            if (attackDirection.x == 0 && Mathf.Sign(attackDirection.z) == 1) targetTiles.Add(new Vector2(0, i + 1));
-            if (attackDirection.z == 0 && Mathf.Sign(attackDirection.x) == -1) targetTiles.Add(new Vector2(-(i + 1), 0));
-            if (attackDirection.z == 0 && Mathf.Sign(attackDirection.x) == 1) targetTiles.Add(new Vector2((i + 1), 0));
-        }
-
-        telegraphScript.endTelegraph(targetTiles);
-
         isChargingAttack = false;
     }
 

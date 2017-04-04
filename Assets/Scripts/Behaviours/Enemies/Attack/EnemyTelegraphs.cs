@@ -4,13 +4,18 @@ using UnityEngine;
 
 public class EnemyTelegraphs : MonoBehaviour {
 
-	public void startTelegraph(List<Vector2> targetTiles)
+    SimpleMapGridCreation gridScript;
+
+    private void Start()
     {
-        print("Attacking: " + targetTiles);
+        gridScript = GameObject.Find("MapLayout").GetComponent<SimpleMapGridCreation>();
     }
 
-    public void endTelegraph(List<Vector2> targetTiles)
+    public void startTelegraph(List<Vector2> targetTiles)
     {
-        print("Hit: " + targetTiles);
+        foreach(Vector2 v in targetTiles)
+        {
+            if (v.x >= 0 && v.x < gridScript.mapSizeX && v.y >= 0 && v.y < gridScript.mapSizeY) gridScript.tiles[(int)v.x, (int)v.y].GetComponent<Renderer>().material.color = Color.red;
+        }
     }
 }

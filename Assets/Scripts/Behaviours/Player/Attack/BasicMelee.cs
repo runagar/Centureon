@@ -28,6 +28,7 @@ public class BasicMelee : MonoBehaviour {
                 {
                     turnTracker.enemies[i].GetComponent<UnitStats>().isKill = "yes";
                     Destroy(turnTracker.enemies[i]);
+                    turnTracker.enemies[i] = null;
                     turnTracker.PlayerTakeTurn();
                     break;
                 }
@@ -41,6 +42,7 @@ public class BasicMelee : MonoBehaviour {
                 {
                     turnTracker.enemies[i].GetComponent<UnitStats>().isKill = "yes";
                     Destroy(turnTracker.enemies[i]);
+                    turnTracker.enemies[i] = null;
                     turnTracker.PlayerTakeTurn();
                     break;
                 }
@@ -54,6 +56,7 @@ public class BasicMelee : MonoBehaviour {
                 {
                     turnTracker.enemies[i].GetComponent<UnitStats>().isKill = "yes";
                     Destroy(turnTracker.enemies[i]);
+                    turnTracker.enemies[i] = null;
                     turnTracker.PlayerTakeTurn();
                     break;
                 }
@@ -67,6 +70,7 @@ public class BasicMelee : MonoBehaviour {
                 {
                     turnTracker.enemies[i].GetComponent<UnitStats>().isKill = "yes";
                     Destroy(turnTracker.enemies[i]);
+                    turnTracker.enemies[i] = null;
                     turnTracker.PlayerTakeTurn();
                     break;
                 }

@@ -14,7 +14,6 @@ public class PlayerMovement : MonoBehaviour
     float timeSinceLastMove;
 	public SpriteRenderer mySpriteRenderer;
 
-
     // Use this for initialization
     void Start()
     {
@@ -52,52 +51,90 @@ public class PlayerMovement : MonoBehaviour
 
     void MovePlayerPiece(string dir)
     {
+        bool enemyInTheWay = false;
         switch (dir) {
             case "z1":
+                foreach(GameObject o in turnTracker.enemies)
+                {
+                    if (o != null && o.transform.position == transform.position + new Vector3(0, -0.25f, 1))
+                    {
+                        enemyInTheWay = true;
+                        break;
+                    }
+                    else enemyInTheWay = false;
+                }
+
                 if (mapLayout.map[(int)currentPos.y + 1, (int)currentPos.x] != 0) break;
-                else
+                else if(!enemyInTheWay)
                 {
                     movement = new Vector3(0, 0, 1);
                     transform.position += movement;
                     timeSinceLastMove = 0;
                     turnTracker.PlayerTakeTurn();
-                    break;
                 }
+                break;
 
             case "z-1":
+                foreach (GameObject o in turnTracker.enemies)
+                {
+                    if (o != null && o.transform.position == transform.position + new Vector3(0, -0.25f, -1))
+                    {
+                        enemyInTheWay = true;
+                        break;
+                    }
+                    else enemyInTheWay = false;
+                }
                 if (mapLayout.map[(int)currentPos.y - 1, (int)currentPos.x] != 0) break;
-                else
+                else if (!enemyInTheWay)
                 {
                     movement = new Vector3(0, 0, -1);
                     transform.position += movement;
                     timeSinceLastMove = 0;
                     turnTracker.PlayerTakeTurn();
-                    break;
                 }
+                break;
 
             case "x-1":
-                if (mapLayout.map[(int)currentPos.y, (int)currentPos.x - 1] != 0) break;
-                else
+                foreach (GameObject o in turnTracker.enemies)
                 {
-					mySpriteRenderer.flipX = true;
+                    if (o != null && o.transform.position == transform.position + new Vector3(-1, -0.25f, 0))
+                    {
+                        enemyInTheWay = true;
+                        break;
+                    }
+                    else enemyInTheWay = false;
+                }
+                if (mapLayout.map[(int)currentPos.y, (int)currentPos.x - 1] != 0) break;
+                else if (!enemyInTheWay)
+                {
+                    mySpriteRenderer.flipX = true;
                     movement = new Vector3(-1, 0, 0);
                     transform.position += movement;
                     timeSinceLastMove = 0;
                     turnTracker.PlayerTakeTurn();
-					break;
                 }
+                break;
 
             case "x1":
-                if (mapLayout.map[(int)currentPos.y, (int)currentPos.x + 1] != 0) break;
-                else
+                foreach (GameObject o in turnTracker.enemies)
                 {
-					mySpriteRenderer.flipX = false;
+                    if (o != null && o.transform.position == transform.position + new Vector3(1, -0.25f, 0))
+                    {
+                        enemyInTheWay = true;
+                        break;
+                    }
+                    else enemyInTheWay = false;
+                }
+                if (mapLayout.map[(int)currentPos.y, (int)currentPos.x + 1] != 0) break;
+                else if (!enemyInTheWay)
+                {
+                    mySpriteRenderer.flipX = false;
                     movement = new Vector3(1, 0, 0);
                     transform.position += movement;
                     timeSinceLastMove = 0;
                     turnTracker.PlayerTakeTurn();
-                    break;
                 }
+                break;
 
             default:
                 break;
