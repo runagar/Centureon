@@ -17,6 +17,8 @@ public class BaseMovement : MonoBehaviour {
     public float desiredMove_X, desiredMove_Z, absDelta_X, absDelta_Z;
 
     //Cache necessities for movement
+    Vector3 currentDesiredPosition;
+    Vector3 myDesiredPosition;
     List<Vector3> possibleRangedPositions;
     Vector3 movementVector;
     SimpleMapGridCreation gridScript;
@@ -200,7 +202,7 @@ public class BaseMovement : MonoBehaviour {
         return path;
     }
 
-    List<Vector3> desiredRangedPosition(GameObject player) {
+    Vector3 desiredRangedPosition(GameObject player) {
         List<Vector3> desiredPositions = new List<Vector3>();
         List<Vector3> adjecentSquares = new List<Vector3>();
         List<Vector3> possibleSquares = new List<Vector3>();
@@ -249,7 +251,22 @@ public class BaseMovement : MonoBehaviour {
         {
             desiredPositions.Add(new Vector3(this.transform.position.x, 0.25f, adjecentSquares[3].z));
         }
-        Debug.Log(desiredPositions.Count);
-        return desiredPositions;
+
+        float lowestHcost = Mathf.Infinity;
+        float hCost;
+        foreach(Vector3 v in desiredPositions)
+        {
+            hCost = ((v.x - this.transform.position.x) + (v.z - this.transform.position.z));
+
+            if (v.x == player.transform.position.x || v.z == player.transform.position.z) hCost =- 2;
+
+            if(hCost < lowestHcost)
+            {
+                lowestHcost = hCost;
+                myDesiredPosition = v;
+            }
+        }
+
+        return myDesiredPosition;
     }
 }
