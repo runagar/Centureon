@@ -67,8 +67,10 @@ public class BaseMovement : MonoBehaviour {
             movementVector = new Vector3(0, 0, 0);
         }
 
+        Vector3 desiredPosition = desiredRangedPosition(player);
+
         //If the unit is on the same X or Z coordinate as the player
-        if (desiredMove_X == 0 || desiredMove_Z == 0)
+        if (this.transform.position == desiredPosition)
         {
             //Start charging attack, don't move.
             rangedAttack.ChargeAttack(player.transform.position - transform.position);
