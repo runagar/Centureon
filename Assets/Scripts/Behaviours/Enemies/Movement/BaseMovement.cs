@@ -35,6 +35,7 @@ public class BaseMovement : MonoBehaviour {
         gridScript = GameObject.Find("MapLayout").GetComponent<SimpleMapGridCreation>();
         map = gridScript.map;
 
+
         attackRange = stats.range;
     }
 
