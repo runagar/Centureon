@@ -7,8 +7,11 @@ public class EnemyMelee : MonoBehaviour {
 
     bool isChargingAttack;
 
-    Vector3 attackDirection;
+    public Vector3 attackDirection;
     GameObject player;
+
+    EnemyTelegraphs telegraphScript;
+    public List<Vector2> targetTiles;
 
     // Use this for initialization
     void Start () {
@@ -17,27 +20,47 @@ public class EnemyMelee : MonoBehaviour {
         stats = this.GetComponent<UnitStats>();
 
         player = GameObject.FindGameObjectWithTag("PLAYER");
+        telegraphScript = this.GetComponent<EnemyTelegraphs>();
+        targetTiles = new List<Vector2>();
     }
 	
 	public void ChargeAttack(Vector3 attackDir)
     {
         attackDirection = attackDir;
         isChargingAttack = true;
+
+        targetTiles.Clear();
+
+        int x = (int)transform.position.x;
+        int z = (int)transform.position.z;
+
+        for (int i = 0; i < stats.range; i++)
+        {
+            if (attackDirection.x == 0 && Mathf.Sign(attackDirection.z) == -1) targetTiles.Add(new Vector2(x, -(i + 1) + z));
+            if (attackDirection.x == 0 && Mathf.Sign(attackDirection.z) == 1) targetTiles.Add(new Vector2(x, i + 1 + z));
+            if (attackDirection.z == 0 && Mathf.Sign(attackDirection.x) == -1) targetTiles.Add(new Vector2(-(i + 1) + x, z));
+            if (attackDirection.z == 0 && Mathf.Sign(attackDirection.x) == 1) targetTiles.Add(new Vector2(i + 1 + x, z));
+        }
+
+        telegraphScript.startTelegraph(targetTiles);
     }
 
     public void ConcludeAttack()
     {
         if (player != null && stats.isKill == "no") {
 
-            Vector2 p = new Vector2(player.transform.position.x, player.transform.position.z);
-            Vector2 a = new Vector2(this.transform.position.x + attackDirection.x, this.transform.position.z + attackDirection.z);
+            Vector2 playerPos = new Vector2(player.transform.position.x, player.transform.position.z);
 
-            if (p == a && this.gameObject != null) {
-                Destroy(player.gameObject);
+            foreach(Vector2 v in targetTiles)
+            {
+                if (v.x == playerPos.x && v.y == playerPos.y)
+                {
+                    Destroy(player.gameObject);
+                    break;
+                }  
             }
+            
         }
-
-
         isChargingAttack = false;
     }
 

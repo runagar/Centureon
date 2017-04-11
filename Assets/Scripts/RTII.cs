@@ -8,29 +8,47 @@ public class RTII : MonoBehaviour {
     public float _backRightLeg;
     public float _backLeftLeg;
 
-    float _legDifferenceAB, _legDifferenceAC, _legDifferenceBD, _legDifferenceCD;
     private Vector3 _rotation;
     private float _rotationSensitivity;
-    float deltaSideWays, deltaFrontWays;
+    public float deltaSideWays, deltaFrontWays;
+
     void Start () {
-        _rotationSensitivity = 0.2f;
+        _rotationSensitivity = 0.001f;
 	}
 	
 	void Update () {
+
+        if (_frontLeftLeg < 0) _frontLeftLeg = 0;
+        if (_frontRigthLeg < 0) _frontRigthLeg = 0;
+        if (_backLeftLeg < 0) _backLeftLeg = 0;
+        if (_backRightLeg < 0) _backRightLeg = 0;
+
         deltaSideWays = (_frontLeftLeg + _backLeftLeg) - (_frontRigthLeg + _backRightLeg);
         deltaFrontWays = (_frontRigthLeg + _frontLeftLeg) - (_backRightLeg + _backLeftLeg);
         _rotation = Vector3.zero;
+
+        //determines which side the user is leaning to
         if (Mathf.Abs(deltaSideWays) > 50)
         {
-            //we lean right
             _rotation.y += deltaSideWays * _rotationSensitivity;
+            transform.Rotate(Vector3.up * _rotation.y);
         }
-        if(Mathf.Abs(deltaFrontWays) > 50)
+
+        //determines if the user is leaning forward or backwards.
+        if (Mathf.Abs(deltaFrontWays) > 50)
         {
             _rotation.x += deltaFrontWays * _rotationSensitivity;
+            transform.Rotate(Vector3.right * _rotation.x);
         }
 
+        //""""""""""""
+        //check if we are at the rotaion limit.
+        //""""""""""""
 
+        if (transform.eulerAngles.x > 180 && transform.eulerAngles.x < 345) transform.eulerAngles = new Vector3(345, transform.eulerAngles.y, 0);
+        if (transform.eulerAngles.x > 15 && transform.eulerAngles.x < 180) transform.eulerAngles = new Vector3(15, transform.eulerAngles.y, 0);
+        if (transform.eulerAngles.y > 180 && transform.eulerAngles.y < 345) transform.eulerAngles = new Vector3(transform.eulerAngles.x, 345, 0);
+        if (transform.eulerAngles.y > 15 && transform.eulerAngles.y < 180) transform.eulerAngles = new Vector3(transform.eulerAngles.x, 15, 0);
 
     }
 }

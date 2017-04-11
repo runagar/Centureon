@@ -17,14 +17,20 @@ public class BaseMovement : MonoBehaviour {
     public float desiredMove_X, desiredMove_Z, absDelta_X, absDelta_Z;
 
     //Cache necessities for movement
+    Vector3 currentDesiredPosition;
+    Vector3 myDesiredPosition;
     List<Vector3> possibleRangedPositions;
     Vector3 movementVector;
     SimpleMapGridCreation gridScript;
     int[,] map;
     int attackRange;
 
+    TurnTracker turnTracker;
 
-	void Start () {
+    public int xBlocked;
+    public int zBlocked;
+
+    void Start () {
         //Reference the cached scripts and objects
         stats = this.gameObject.GetComponent<UnitStats>();
         mySpriteRenderer = transform.FindChild("SpriteEnemy").GetComponent<SpriteRenderer>();
@@ -34,6 +40,8 @@ public class BaseMovement : MonoBehaviour {
         player = GameObject.FindGameObjectWithTag("PLAYER");
         gridScript = GameObject.Find("MapLayout").GetComponent<SimpleMapGridCreation>();
         map = gridScript.map;
+
+        turnTracker = GameObject.Find("TurnTracker").GetComponent<TurnTracker>();
 
         attackRange = stats.range;
     }
@@ -64,21 +72,42 @@ public class BaseMovement : MonoBehaviour {
             movementVector = new Vector3(0, 0, 0);
         }
 
+        Vector3 desiredPosition = desiredRangedPosition(player);
+        Debug.Log(desiredPosition);
         //If the unit is on the same X or Z coordinate as the player
-        if (desiredMove_X == 0 || desiredMove_Z == 0)
+        if (this.transform.position == desiredPosition)
         {
             //Start charging attack, don't move.
             rangedAttack.ChargeAttack(player.transform.position - transform.position);
 			movementVector = new Vector3(0, 0, 0);
-
-            //Move the enemy by the path.
-            transform.position += movementVector * stats.movementSpeed;
         }
+        else
+        {
+            Vector2 start = new Vector2(transform.position.x, transform.position.z);
+            Vector2 goal = new Vector2(desiredPosition.x, desiredPosition.z);
+            Vector2 tempMovement = pathfinding(start, goal)[0];
+
+            movementVector = new Vector3(tempMovement.x, 0, tempMovement.y) - transform.position;
+        }
+
+        //Move the enemy by the path.
+        if (movementVector.x == -1 || movementVector.z == -1)
+            mySpriteRenderer.flipX = true;
+        else
+            mySpriteRenderer.flipX = false;
+
+        transform.position += movementVector;
     }
 
     //Method for movement if the unit is melee
     void MeleeMovement()
     {
+        Vector2 start = new Vector2(transform.position.x, transform.position.z);
+        Vector2 goal = new Vector2(player.transform.position.x, player.transform.position.z);
+        Vector2 tempMovement = pathfinding(start, goal)[0];
+
+        movementVector = new Vector3(tempMovement.x, 0, tempMovement.y) - transform.position;
+
         //If the unit is winding up to attack
         if (meleeAttack.GetAttackStatus())
         {
@@ -90,45 +119,95 @@ public class BaseMovement : MonoBehaviour {
         //If the manhatten-distance to the player is <= 2 (meaning either adjacent to player, or a player-adjacent square)
         else if (absDelta_X + absDelta_Z <= (1 + 1 * attackRange))
         {
-            //we do not move but attack a adjcent square instead
-            movementVector = new Vector3(0, 0, 0);
-
+            
             for(int i = -1; i < 2; i++){
                 for(int j = -1; j < 2; j++)
                 {
-                    if(desiredMove_X == i * (1 + attackRange) && desiredMove_Z == j * (1 + attackRange))
+                    //if we found the i and j with the same sign as the desired direction, and they are not both zero
+                    if(Mathf.Sign(desiredMove_X) == Mathf.Sign(i) && Mathf.Sign(desiredMove_Z) == Mathf.Sign(j) && (i != 0 && j != 0))
                     {
-                        if(absDelta_X == absDelta_Z)
+                        //Ints for determining if positions are blocked
+                        xBlocked = 0;
+                        zBlocked = 0;
+
+                        //based on the range of the unit, go through all the relevant tiles and check if they are blocked.
+                        for (int r = 0; r < attackRange; r++)
                         {
-                            switch (Random.Range(0, 2))
-                            {
-                                case 0:
-                                    meleeAttack.ChargeAttack(new Vector3(i * attackRange, 0, 0));
-                                    break;
-                                case 1:
-                                    meleeAttack.ChargeAttack(new Vector3(0, 0, j * attackRange));
-                                    break;
-                            }
+                            if (gridScript.map[(int)transform.position.z, (int)transform.position.x + (r + 1) * i] != 0 && xBlocked == 0) xBlocked = r + 1;
+                            if (gridScript.map[(int)transform.position.z + (r + 1) * j, (int)transform.position.x] != 0 && zBlocked == 0) zBlocked = r + 1;
+                        }
+
+                        //If it is completely blocked in both directions
+                        if (xBlocked == 1 && zBlocked == 1)
+                        {
+                            i = 2;
                             break;
                         }
-                        meleeAttack.ChargeAttack(new Vector3(i * attackRange, 0, j * attackRange));
-                        break;
+
+                        //If the target is at a diagonal to the enemy
+                        if (absDelta_X == absDelta_Z)
+                        {
+                            //If only blocked in the x direction, attack in the z-direction
+                            if (xBlocked == 1 && (zBlocked == 2 || zBlocked == 0))
+                            {
+                                meleeAttack.ChargeAttack(new Vector3(0, 0, j * attackRange));
+                                movementVector = new Vector3(0, 0, 0); //Set move to zero so we stay where we are.
+                                i = 2;
+                                break;
+                            }
+                            //if only blocked in the z-direction, attack along x
+                            else if ((xBlocked == 2 || xBlocked == 0) && zBlocked == 1)
+                            {
+                                meleeAttack.ChargeAttack(new Vector3(i * attackRange, 0, 0));
+                                movementVector = new Vector3(0, 0, 0);//Set move to zero so we stay where we are.
+                                i = 2;
+                                break;
+                            }
+
+                            //if both ways are open, attack a random one.
+                            else
+                            {
+                                switch (Random.Range(0, 2))
+                                {
+                                    case 0:
+                                        meleeAttack.ChargeAttack(new Vector3(i * attackRange, 0, 0));
+                                        movementVector = new Vector3(0, 0, 0);//Set move to zero so we stay where we are.
+                                        break;
+                                    case 1:
+                                        meleeAttack.ChargeAttack(new Vector3(0, 0, j * attackRange));
+                                        movementVector = new Vector3(0, 0, 0);//Set move to zero so we stay where we are.
+                                        break;
+                                }
+                            }
+                            i = 2;
+                            break;
+                        }
+                        //if the target is closest to Z
+                        if(absDelta_X < absDelta_Z)
+                        {
+                            //if z is not blocked, or it is blocked two tiles away, but the enemy is on the immediately adjacent tile
+                            if(zBlocked == 0 || (zBlocked == 2 && absDelta_X + absDelta_Z == 1))
+                            {
+                                meleeAttack.ChargeAttack(new Vector3(0, 0, j * attackRange));
+                                movementVector = new Vector3(0, 0, 0);//Set move to zero so we stay where we are.
+                                i = 2;
+                                break;
+                            }
+                        }
+                        //if the target is closest to X and x is not blocked, or it is blocked two tiles away, but the enemy is on the immediately adjacent tile
+                        else if (xBlocked == 0 || (xBlocked == 2 && absDelta_X + absDelta_Z == 1))
+                        {
+                            meleeAttack.ChargeAttack(new Vector3(i * attackRange, 0, 0));
+                            movementVector = new Vector3(0, 0, 0);//Set move to zero so we stay where we are.
+                            i = 2;
+                            break;
+                        }
                     }
                 }
             }
-        }
-        else
-        {
-            Vector2 start = new Vector2(transform.position.x, transform.position.z);
-            Vector2 goal = new Vector2(player.transform.position.x, player.transform.position.z);
-            Vector2 tempMovement = pathfinding(start, goal)[0];
-
-            movementVector = new Vector3(tempMovement.x, 0, tempMovement.y) - transform.position;
-
-        }
+        } 
 
 		//Move the enemy by the path.
-
 		if (movementVector.x == -1 || movementVector.z == -1)
 			mySpriteRenderer.flipX = true;
 		else
@@ -183,9 +262,16 @@ public class BaseMovement : MonoBehaviour {
                         //If that neighbour is neither in the open list nor the burned list
                         if (!open.Contains(temp) && !burned.Contains(temp) && map[(int)temp.y, (int)temp.x] == 0)
                         {
-                            //Add it to the open list, and define which pos we came to here from.
-                            open.Add(temp);
-                            parents[(int)temp.x, (int)temp.y] = current;
+                            foreach (GameObject o in turnTracker.enemies)
+                            {
+                                if (temp.x == o.transform.position.x && temp.y == o.transform.position.z) break;
+                                else if (o == turnTracker.enemies[turnTracker.enemies.Length - 1])
+                                {
+                                    //Add it to the open list, and define which pos we came to here from.
+                                    open.Add(temp);
+                                    parents[(int)temp.x, (int)temp.y] = current;
+                                }
+                            }
                         }
                     }
                 }
@@ -199,7 +285,7 @@ public class BaseMovement : MonoBehaviour {
         return path;
     }
 
-    List<Vector3> desiredRangedPosition(GameObject player) {
+    Vector3 desiredRangedPosition(GameObject player) {
         List<Vector3> desiredPositions = new List<Vector3>();
         List<Vector3> adjecentSquares = new List<Vector3>();
         List<Vector3> possibleSquares = new List<Vector3>();
@@ -248,7 +334,23 @@ public class BaseMovement : MonoBehaviour {
         {
             desiredPositions.Add(new Vector3(this.transform.position.x, 0.25f, adjecentSquares[3].z));
         }
-        Debug.Log(desiredPositions.Count);
-        return desiredPositions;
+
+        float lowestHcost = Mathf.Infinity;
+        float hCost;
+        foreach(Vector3 v in desiredPositions)
+        {
+            hCost = ((v.x - this.transform.position.x) + (v.z - this.transform.position.z));
+
+            if (v.x == player.transform.position.x || v.z == player.transform.position.z) { 
+                hCost = hCost - 2;
+            }
+
+            if (hCost < lowestHcost){
+                lowestHcost = hCost;
+                myDesiredPosition = v;
+            }
+        }
+
+        return myDesiredPosition;
     }
 }

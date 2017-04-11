@@ -24,10 +24,11 @@ public class BasicMelee : MonoBehaviour {
         {
             for(int i = 0; i < turnTracker.enemies.Length; i++)
             {
-                if(turnTracker.enemies[i] != null && turnTracker.enemies[i].transform.position.z == transform.position.z + 1)
+                if(turnTracker.enemies[i] != null && turnTracker.enemies[i].transform.position.z == transform.position.z + 1 && turnTracker.enemies[i].transform.position.x == transform.position.x)
                 {
                     turnTracker.enemies[i].GetComponent<UnitStats>().isKill = "yes";
                     Destroy(turnTracker.enemies[i]);
+                    turnTracker.enemies[i] = null;
                     turnTracker.PlayerTakeTurn();
                     break;
                 }
@@ -37,10 +38,11 @@ public class BasicMelee : MonoBehaviour {
         {
             for (int i = 0; i < turnTracker.enemies.Length; i++)
             {
-                if (turnTracker.enemies[i] != null && turnTracker.enemies[i].transform.position.z == transform.position.z - 1)
+                if (turnTracker.enemies[i] != null && turnTracker.enemies[i].transform.position.z == transform.position.z - 1 && turnTracker.enemies[i].transform.position.x == transform.position.x)
                 {
                     turnTracker.enemies[i].GetComponent<UnitStats>().isKill = "yes";
                     Destroy(turnTracker.enemies[i]);
+                    turnTracker.enemies[i] = null;
                     turnTracker.PlayerTakeTurn();
                     break;
                 }
@@ -50,10 +52,11 @@ public class BasicMelee : MonoBehaviour {
         {
             for (int i = 0; i < turnTracker.enemies.Length; i++)
             {
-                if (turnTracker.enemies[i] != null && turnTracker.enemies[i].transform.position.x == transform.position.x - 1)
+                if (turnTracker.enemies[i] != null && turnTracker.enemies[i].transform.position.x == transform.position.x - 1 && turnTracker.enemies[i].transform.position.z == transform.position.z)
                 {
                     turnTracker.enemies[i].GetComponent<UnitStats>().isKill = "yes";
                     Destroy(turnTracker.enemies[i]);
+                    turnTracker.enemies[i] = null;
                     turnTracker.PlayerTakeTurn();
                     break;
                 }
@@ -63,10 +66,11 @@ public class BasicMelee : MonoBehaviour {
         {
             for (int i = 0; i < turnTracker.enemies.Length; i++)
             {
-                if (turnTracker.enemies[i] != null && turnTracker.enemies[i].transform.position.x == transform.position.x + 1)
+                if (turnTracker.enemies[i] != null && turnTracker.enemies[i].transform.position.x == transform.position.x + 1 && turnTracker.enemies[i].transform.position.z == transform.position.z)
                 {
                     turnTracker.enemies[i].GetComponent<UnitStats>().isKill = "yes";
                     Destroy(turnTracker.enemies[i]);
+                    turnTracker.enemies[i] = null;
                     turnTracker.PlayerTakeTurn();
                     break;
                 }
