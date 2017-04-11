@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class LoadSceneOnClick : MonoBehaviour {
 
 	static int selected = 0;
-
+	public int sceneIndex;
     //mainMenuVariables varKeeper;
 	Button Mainmenu;
 	//public Sprite MainMenuSprite;
@@ -17,10 +17,6 @@ public class LoadSceneOnClick : MonoBehaviour {
 	    //varKeeper = GameObject.Find("KeeperOfVariables").GetComponent<mainMenuVariables>();
 		Mainmenu = GetComponent<Button>();
 		//Mainmenu.image.sprite = MainMenuSprite;
-    }
-
-	public void LoadByIndex(int sceneIndex) {
-		SceneManager.LoadScene(sceneIndex);
     }
 
     public void loadMainMenu()
@@ -36,4 +32,10 @@ public class LoadSceneOnClick : MonoBehaviour {
     {
 //        varKeeper.useDragonDrop = false;
     }
+	public void OnMouseDown()
+	{
+		SceneManager.LoadScene(sceneIndex);
+		if(this.gameObject.transform.name == "Quit")
+			 Application.Quit();
+	}
 }
