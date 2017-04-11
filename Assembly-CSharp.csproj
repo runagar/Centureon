@@ -203,6 +203,7 @@
      <Compile Include="Assets\Scripts\Behaviours\Player\PlayerStats.cs" />
      <Compile Include="Assets\Scripts\Behaviours\Projectiles\Projectile.cs" />
      <Compile Include="Assets\Scripts\Billboard.cs" />
+     <Compile Include="Assets\Scripts\LoadSceneOnClick.cs" />
      <Compile Include="Assets\Scripts\Management\ProjectileTracker.cs" />
      <Compile Include="Assets\Scripts\Management\Spawner.cs" />
      <Compile Include="Assets\Scripts\Management\TurnTracker.cs" />
