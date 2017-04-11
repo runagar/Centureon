@@ -19,6 +19,5 @@ public class QuitOnClick : MonoBehaviour {
 	}
 	void Quit() { 
 			Application.Quit();
-
 	}
 }
