@@ -138,23 +138,29 @@ public class BaseMovement : MonoBehaviour {
                         }
 
                         //If it is completely blocked in both directions
-                        if (xBlocked == 1 && zBlocked == 1) break;
+                        if (xBlocked == 1 && zBlocked == 1)
+                        {
+                            i = 2;
+                            break;
+                        }
 
                         //If the target is at a diagonal to the enemy
                         if (absDelta_X == absDelta_Z)
                         {
                             //If only blocked in the x direction, attack in the z-direction
-                            if (xBlocked == 1 && zBlocked == 2)
+                            if (xBlocked == 1 && (zBlocked == 2 || zBlocked == 0))
                             {
                                 meleeAttack.ChargeAttack(new Vector3(0, 0, j * attackRange));
                                 movementVector = new Vector3(0, 0, 0); //Set move to zero so we stay where we are.
+                                i = 2;
                                 break;
                             }
                             //if only blocked in the z-direction, attack along x
-                            else if (xBlocked == 2 && zBlocked == 1)
+                            else if ((xBlocked == 2 || xBlocked == 0) && zBlocked == 1)
                             {
                                 meleeAttack.ChargeAttack(new Vector3(i * attackRange, 0, 0));
                                 movementVector = new Vector3(0, 0, 0);//Set move to zero so we stay where we are.
+                                i = 2;
                                 break;
                             }
 
@@ -173,6 +179,7 @@ public class BaseMovement : MonoBehaviour {
                                         break;
                                 }
                             }
+                            i = 2;
                             break;
                         }
                         //if the target is closest to Z
@@ -183,6 +190,8 @@ public class BaseMovement : MonoBehaviour {
                             {
                                 meleeAttack.ChargeAttack(new Vector3(0, 0, j * attackRange));
                                 movementVector = new Vector3(0, 0, 0);//Set move to zero so we stay where we are.
+                                i = 2;
+                                break;
                             }
                         }
                         //if the target is closest to X and x is not blocked, or it is blocked two tiles away, but the enemy is on the immediately adjacent tile
@@ -190,8 +199,9 @@ public class BaseMovement : MonoBehaviour {
                         {
                             meleeAttack.ChargeAttack(new Vector3(i * attackRange, 0, 0));
                             movementVector = new Vector3(0, 0, 0);//Set move to zero so we stay where we are.
+                            i = 2;
+                            break;
                         }
-                        break;
                     }
                 }
             }
@@ -252,14 +262,16 @@ public class BaseMovement : MonoBehaviour {
                         //If that neighbour is neither in the open list nor the burned list
                         if (!open.Contains(temp) && !burned.Contains(temp) && map[(int)temp.y, (int)temp.x] == 0)
                         {
-                            foreach(GameObject o in turnTracker.enemies)
+                            foreach (GameObject o in turnTracker.enemies)
                             {
-                                if (temp.x == o.transform.position.z && temp.y == o.transform.position.x) continue;
+                                if (temp.x == o.transform.position.x && temp.y == o.transform.position.z) break;
+                                else if (o == turnTracker.enemies[turnTracker.enemies.Length - 1])
+                                {
+                                    //Add it to the open list, and define which pos we came to here from.
+                                    open.Add(temp);
+                                    parents[(int)temp.x, (int)temp.y] = current;
+                                }
                             }
-
-                            //Add it to the open list, and define which pos we came to here from.
-                            open.Add(temp);
-                            parents[(int)temp.x, (int)temp.y] = current;
                         }
                     }
                 }
