@@ -210,6 +210,7 @@
      <Compile Include="Assets\Scripts\Management\VictoryDefeatCondition.cs" />
      <Compile Include="Assets\Scripts\Management\levelManager.cs" />
      <Compile Include="Assets\Scripts\MouseOver.cs" />
+     <Compile Include="Assets\Scripts\QuitOnClick.cs" />
      <Compile Include="Assets\Scripts\RTII.cs" />
      <Compile Include="Assets\Scripts\SimpleMapGridCreation.cs" />
      <None Include="Assets\3rd Party\2DxFX\Resources\_2dxFX_GrayScale.shader" />
