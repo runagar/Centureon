@@ -239,8 +239,10 @@
     <Compile Include="Assets\Scripts\Management\VictoryDefeatCondition.cs" />
     <Compile Include="Assets\Scripts\Management\levelManager.cs" />
     <Compile Include="Assets\Scripts\MouseOver.cs" />
+    <Compile Include="Assets\Scripts\QuitOnClick.cs" />
     <Compile Include="Assets\Scripts\RTII.cs" />
     <Compile Include="Assets\Scripts\SimpleMapGridCreation.cs" />
+    <Compile Include="Assets\Scripts\UIOutline.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\3rd Party\2DxFX\Resources\2dxfx_AL\_2dxFX_AL_4Gradients.shader" />
