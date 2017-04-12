@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class EnemyMelee : MonoBehaviour {
     UnitStats stats;
+	private AudioSource audio;
+	public AudioClip death;
+	bool check = false;
 
     bool isChargingAttack;
 
@@ -15,6 +18,7 @@ public class EnemyMelee : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
+		audio = gameObject.GetComponent<AudioSource>();
         isChargingAttack = false;
 
         stats = this.GetComponent<UnitStats>();
@@ -55,8 +59,10 @@ public class EnemyMelee : MonoBehaviour {
             {
                 if (v.x == playerPos.x && v.y == playerPos.y)
                 {
-                    Destroy(player.gameObject);
-                    break;
+					audio.Play();
+						Destroy(player.gameObject);
+					if (audio.isPlaying)
+					break;
                 }  
             }
             
