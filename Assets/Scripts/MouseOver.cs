@@ -28,7 +28,6 @@ public class MouseOver : MonoBehaviour
 		reflection.enabled = false;
 		outline.enabled = true;
 		//outline._OutLineSpread = 0.02f;
-		print(gameObject.name);
 	}
 	void OnMouseExit()
 	{
