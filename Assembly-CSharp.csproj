@@ -213,6 +213,8 @@
      <Compile Include="Assets\Scripts\MouseOver.cs" />
      <Compile Include="Assets\Scripts\QuitOnClick.cs" />
      <Compile Include="Assets\Scripts\RTII.cs" />
+     <Compile Include="Assets\Scripts\RTII\UnityProject\Assets\Arduino.cs" />
+     <Compile Include="Assets\Scripts\RTII\UnityProject\Assets\ArduinoLogger.cs" />
      <Compile Include="Assets\Scripts\SimpleMapGridCreation.cs" />
      <Compile Include="Assets\Scripts\UIOutline.cs" />
      <None Include="Assets\3rd Party\2DxFX\Resources\_2dxFX_GrayScale.shader" />
@@ -255,6 +257,7 @@
      <None Include="Assets\3rd Party\2DxFX\Resources\_2dxFX_EdgeColor.shader" />
      <None Include="Assets\3rd Party\2DxFX\Resources\2dxfx_AL\_2dxFX_AL_DestroyedFX.shader" />
      <None Include="Assets\3rd Party\2DxFX\Resources\2dxfx_AL\_2dxFX_AL_ColorChange.shader" />
+     <None Include="Assets\Scripts\RTII\UnityProject\ProjectSettings\ProjectVersion.txt" />
      <None Include="Assets\3rd Party\2DxFX\Resources\_2dxFX_WoodFX.shader" />
      <None Include="Assets\3rd Party\2DxFX\Resources\_2dxFX_Mystic_Distortion.shader" />
      <None Include="Assets\3rd Party\2DxFX\Resources\_2dxFX_BurningFX.shader" />
@@ -348,6 +351,7 @@
      <None Include="Assets\3rd Party\2DxFX\Resources\_2dxFX_Distortion.shader" />
      <None Include="Assets\3rd Party\2DxFX\Resources\_2dxFX_Lightning.shader" />
      <None Include="Assets\3rd Party\2DxFX\Resources\_2dxFX_Sepia.shader" />
+     <None Include="Assets\Scripts\RTII\ArduinoProject\ButtonDebounce\keywords.txt" />
      <None Include="Assets\3rd Party\2DxFX\Resources\_2dxFX_SkyCloud.shader" />
      <None Include="Assets\3rd Party\2DxFX\Resources\_2dxFX_GrassFX.shader" />
      <None Include="Assets\3rd Party\2DxFX\Resources\2dxfx_AL\_2dxFX_AL_Sepia.shader" />

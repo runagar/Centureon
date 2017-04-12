@@ -14,7 +14,7 @@ using System.Collections;
 using System.IO.Ports;
 
 public class Arduino : MonoBehaviour {
-
+	
     //Serial port values
     public string PortName = "/dev/cu.usbmodem1421";
     public int BaudRate = 115200;
@@ -260,7 +260,7 @@ public class Arduino : MonoBehaviour {
         try
         {
             byte[] buffer = new byte[arduino.ReadBufferSize];
-            arduino.Read(buffer, 0, buffer.Length);
+           arduino.Read(buffer, 0, buffer.Length);
         }
         catch (System.Exception)
         {
@@ -277,6 +277,6 @@ public class Arduino : MonoBehaviour {
     void OnDisable()
     {
         StopCoroutine(ReadIncomingData());
-        arduino.Close();
+       arduino.Close();
     }
 }
