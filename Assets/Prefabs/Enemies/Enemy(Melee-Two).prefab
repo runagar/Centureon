@@ -20,9 +20,9 @@ GameObject:
   m_Component:
   - component: {fileID: 4089563331433214}
   - component: {fileID: 212860655198076132}
-  - component: {fileID: 114821189300709016}
+  - component: {fileID: 114698628823744494}
   m_Layer: 0
-  m_Name: SpriteEnemyTwo
+  m_Name: SpriteEnemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -43,7 +43,6 @@ GameObject:
   - component: {fileID: 114586344791757116}
   - component: {fileID: 114360698138521200}
   - component: {fileID: 114085758089089134}
-  - component: {fileID: 114171803853067120}
   m_Layer: 0
   m_Name: Enemy(Melee-Two)
   m_TagString: ENEMY
@@ -139,17 +138,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f89acf961b2790841815c7b8a01335f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &114171803853067120
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1935681666225724}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9e70e74c7cee4465987c7e5ee0556538, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &114360698138521200
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -197,7 +185,7 @@ MonoBehaviour:
   projectileSpeed: 0
   range: 2
   isKill: no
---- !u!114 &114821189300709016
+--- !u!114 &114698628823744494
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -205,7 +193,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1297821508223632}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9e70e74c7cee4465987c7e5ee0556538, type: 3}
+  m_Script: {fileID: 11500000, guid: dea360d6633f14a2d8fb18907c6febfe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!212 &212860655198076132

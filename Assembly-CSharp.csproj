@@ -193,6 +193,7 @@
      <Compile Include="Assets\3rd Party\2DxFX\Scripts\_2dxFX_WoodFX.cs" />
      <Compile Include="Assets\Prefabs\placeholder.cs" />
      <Compile Include="Assets\Scripts\Beatmovement.cs" />
+     <Compile Include="Assets\Scripts\Beatmovementtwo.cs" />
      <Compile Include="Assets\Scripts\Behaviours\Enemies\Attack\EnemyMelee.cs" />
      <Compile Include="Assets\Scripts\Behaviours\Enemies\Attack\EnemyRanged.cs" />
      <Compile Include="Assets\Scripts\Behaviours\Enemies\Attack\EnemyTelegraphs.cs" />

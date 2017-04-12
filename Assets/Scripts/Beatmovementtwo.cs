@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Beatmovement : MonoBehaviour
+public class Beatmovementtwo : MonoBehaviour
 {
 	bool check = false;
 	private AudioSource audio;
@@ -24,7 +24,7 @@ public class Beatmovement : MonoBehaviour
 	IEnumerator ToggleRenderer()
 	{
 		yield return new WaitForSeconds(0.66f);
-		this.gameObject.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("MeleeOne kneeling");
+		this.gameObject.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("MeleeTwo kneeling");
 
 		//playaudio();
 	/*	yield return new WaitForSeconds(0.6f);
@@ -34,8 +34,7 @@ public class Beatmovement : MonoBehaviour
 		this.gameObject.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("img1");
 		playaudio();*/
 		yield return new WaitForSeconds(0.66f);
-			this.gameObject.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("MeleeOne standing");
-
+		this.gameObject.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("MeleeTwo standing");
 		//playaudio();
 		check = true;
 	}
