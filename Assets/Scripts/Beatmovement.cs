@@ -11,7 +11,6 @@ public class Beatmovement : MonoBehaviour
 	{
 		StartCoroutine("ToggleRenderer");
 		audio = GetComponent<AudioSource>();
-
 	}
 
 	void Update()
@@ -24,8 +23,12 @@ public class Beatmovement : MonoBehaviour
 	}
 	IEnumerator ToggleRenderer()
 	{
-		yield return new WaitForSeconds(0.66f); 
-		this.gameObject.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("img1");
+		yield return new WaitForSeconds(0.66f);
+		if(this.gameObject.name=="SpriteEnemyTwo")
+		this.gameObject.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("MeleeTwo kneeling");
+		else
+			this.gameObject.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("MeleeOne kneeling");
+
 		//playaudio();
 	/*	yield return new WaitForSeconds(0.6f);
 		this.gameObject.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("img2");
@@ -34,7 +37,11 @@ public class Beatmovement : MonoBehaviour
 		this.gameObject.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("img1");
 		playaudio();*/
 		yield return new WaitForSeconds(0.66f);
-		this.gameObject.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("img2");
+		if (gameObject.name == "SpriteEnemyTwo")
+		this.gameObject.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("MeleeTwo standing");
+		else
+			this.gameObject.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("MeleeOne standing");
+
 		//playaudio();
 		check = true;
 	}

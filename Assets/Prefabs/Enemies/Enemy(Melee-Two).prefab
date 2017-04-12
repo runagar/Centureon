@@ -20,8 +20,9 @@ GameObject:
   m_Component:
   - component: {fileID: 4089563331433214}
   - component: {fileID: 212860655198076132}
+  - component: {fileID: 114821189300709016}
   m_Layer: 0
-  m_Name: SpriteEnemy
+  m_Name: SpriteEnemyTwo
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -42,6 +43,7 @@ GameObject:
   - component: {fileID: 114586344791757116}
   - component: {fileID: 114360698138521200}
   - component: {fileID: 114085758089089134}
+  - component: {fileID: 114171803853067120}
   m_Layer: 0
   m_Name: Enemy(Melee-Two)
   m_TagString: ENEMY
@@ -69,7 +71,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1935681666225724}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 8.218164, y: -1.4644212, z: 1.9156785}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children:
   - {fileID: 4089563331433214}
@@ -137,6 +139,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f89acf961b2790841815c7b8a01335f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &114171803853067120
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1935681666225724}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9e70e74c7cee4465987c7e5ee0556538, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114360698138521200
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -184,6 +197,17 @@ MonoBehaviour:
   projectileSpeed: 0
   range: 2
   isKill: no
+--- !u!114 &114821189300709016
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1297821508223632}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9e70e74c7cee4465987c7e5ee0556538, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!212 &212860655198076132
 SpriteRenderer:
   m_ObjectHideFlags: 1

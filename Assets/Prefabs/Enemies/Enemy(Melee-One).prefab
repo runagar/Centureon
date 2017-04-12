@@ -20,6 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4089563331433214}
   - component: {fileID: 212860655198076132}
+  - component: {fileID: 114193798710614878}
   m_Layer: 0
   m_Name: SpriteEnemy
   m_TagString: Untagged
@@ -139,6 +140,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackDirection: {x: 0, y: 0, z: 0}
   targetTiles: []
+--- !u!114 &114193798710614878
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1297821508223632}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9e70e74c7cee4465987c7e5ee0556538, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114321008221107118
 MonoBehaviour:
   m_ObjectHideFlags: 1
