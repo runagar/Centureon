@@ -10,6 +10,7 @@ public class LoadSceneOnClick : MonoBehaviour {
 	bool check = false;
 	Animator anim;
 	Animation faded;
+	GameObject start, title, quit,loading, Archimedes;
 	//mainMenuVariables varKeeper;
 	Button Mainmenu;
 	//public Sprite MainMenuSprite;
@@ -21,6 +22,11 @@ public class LoadSceneOnClick : MonoBehaviour {
 		//faded = gameObject.GetComponentInChildren<Animation>();
 	    //varKeeper = GameObject.Find("KeeperOfVariables").GetComponent<mainMenuVariables>();
 		Mainmenu = GetComponent<Button>();
+		start = GameObject.Find("/Start");
+		title = GameObject.Find("/Title");
+		quit = GameObject.Find("/Quit");
+		loading = GameObject.Find("/Loading");
+		Archimedes =GameObject.Find("/Archimedes");
 		//Mainmenu.image.sprite = MainMenuSprite;
     }
 	//!this.anim.GetCurrentAnimatorStateInfo(0).IsName("New Animation")
@@ -44,7 +50,13 @@ public class LoadSceneOnClick : MonoBehaviour {
     }
 	public void OnMouseDown()
 	{
-		SceneManager.LoadScene(sceneIndex);
+		SceneManager.LoadScene(sceneIndex); 
+		start.SetActive(false);
+		title.SetActive(false);
+		quit.SetActive(false);
+		loading.transform.position = new Vector3(0, 1.6f, 4.28f);
+		Archimedes.transform.position = new Vector3(0.05f, -0.7f, 2.92f);
+
 	}
 
 	void animation() {

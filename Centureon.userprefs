@@ -1,12 +1,8 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/LoadSceneOnClick.cs">
     <Files>
-      <File FileName="Assets/Scripts/Behaviours/Player/Attack/BasicMelee.cs" Line="17" Column="14" />
-      <File FileName="Assets/Scripts/LoadSceneOnClick.cs" Line="55" Column="40" />
-      <File FileName="../ProjectElephantsOfMassDestruction/Assets/Scripts/Enemy_Scripts/EnemyMelee_AI_Health.cs" Line="73" Column="34" />
-      <File FileName="../ProjectElephantsOfMassDestruction/Assets/Scripts/GlobalScripts/ScoreManager.cs" Line="128" Column="10" />
-      <File FileName="Assets/Scripts/Management/VictoryDefeatCondition.cs" Line="39" Column="20" />
-      <File FileName="Assets/Scripts/Management/levelManager.cs" Line="15" Column="29" />
+      <File FileName="Assets/Scripts/LoadSceneOnClick.cs" Line="46" Column="6" />
+      <File FileName="Assets/Scripts/MouseOver.cs" Line="16" Column="28" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
