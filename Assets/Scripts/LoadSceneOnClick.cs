@@ -35,7 +35,5 @@ public class LoadSceneOnClick : MonoBehaviour {
 	public void OnMouseDown()
 	{
 		SceneManager.LoadScene(sceneIndex);
-		if(this.gameObject.transform.name == "Quit")
-			 Application.Quit();
 	}
 }
