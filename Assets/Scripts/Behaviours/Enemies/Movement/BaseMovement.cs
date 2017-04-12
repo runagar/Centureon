@@ -107,9 +107,15 @@ public class BaseMovement : MonoBehaviour {
 	//Method for movement if the unit is melee
 	void MeleeMovement()
 	{
+        //Set the start and goal node, and call pathfinding
 		Vector2 start = new Vector2(transform.position.x, transform.position.z);
 		Vector2 goal = new Vector2(player.transform.position.x, player.transform.position.z);
-		Vector2 tempMovement = pathfinding(start, goal)[0];
+        List<Vector2> pathThisTurn = pathfinding(start, goal);
+
+        //If we found a path, use it, otherwise stay were we are
+        Vector2 tempMovement;
+        if (pathThisTurn.Count > 0) tempMovement = pathThisTurn[0];
+        else tempMovement = new Vector2(transform.position.x, transform.position.z);
 
 		movementVector = new Vector3(tempMovement.x, 0, tempMovement.y) - transform.position;
 
@@ -139,8 +145,11 @@ public class BaseMovement : MonoBehaviour {
 						//based on the range of the unit, go through all the relevant tiles and check if they are blocked.
 						for (int r = 0; r < attackRange; r++)
 						{
-							if (gridScript.map[(int)transform.position.z, (int)transform.position.x + (r + 1) * i] != 0 && xBlocked == 0) xBlocked = r + 1;
-							if (gridScript.map[(int)transform.position.z + (r + 1) * j, (int)transform.position.x] != 0 && zBlocked == 0) zBlocked = r + 1;
+                            if ((r+1)*i >= 0 && (r + 1) * i < gridScript.mapSizeX && (r + 1) * j >= 0 && (r + 1) * j < gridScript.mapSizeY)
+                            {
+                                if (gridScript.map[(int)transform.position.z, (int)transform.position.x + (r + 1) * i] != 0 && xBlocked == 0) xBlocked = r + 1;
+                                if (gridScript.map[(int)transform.position.z + (r + 1) * j, (int)transform.position.x] != 0 && zBlocked == 0) zBlocked = r + 1;
+                            }
 						}
 
 						//If it is completely blocked in both directions
