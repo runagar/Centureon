@@ -101,7 +101,7 @@ public class BaseMovement : MonoBehaviour {
             mySpriteRenderer.flipX = false;
             if (stats.range == 2) mySpriteRenderer.transform.position = new Vector3(0.6f, 1.5f, 0);
         }*/
-        transform.position += movementVector;
+        transform.position += new Vector3(movementVector.x, 0, movementVector.z);
     }
 
 	//Method for movement if the unit is melee
@@ -222,7 +222,8 @@ public class BaseMovement : MonoBehaviour {
 	}
 
 
-        transform.position += movementVector;
+        transform.position += new Vector3(movementVector.x, 0, movementVector.z);
+        this.transform.position = new Vector3(transform.position.x, 0.25f, transform.position.z);
 
 
 
