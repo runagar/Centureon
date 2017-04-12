@@ -12,7 +12,7 @@
     <ProjectTypeGuids>{E097FAD1-6243-4DAD-9C02-E9B9EFC3FFC1};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <TargetFrameworkIdentifier>.NETFramework</TargetFrameworkIdentifier>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
-    <TargetFrameworkProfile>Unity Subset v3.5</TargetFrameworkProfile>
+    <TargetFrameworkProfile>Unity Full v3.5</TargetFrameworkProfile>
     <CompilerResponseFile></CompilerResponseFile>
     <UnityProjectType>Game:1</UnityProjectType>
     <UnityBuildTarget>StandaloneWindows:5</UnityBuildTarget>
@@ -222,6 +222,7 @@
     <Compile Include="Assets\3rd Party\2DxFX\Scripts\_2dxFX_WoodFX.cs" />
     <Compile Include="Assets\Prefabs\placeholder.cs" />
     <Compile Include="Assets\Scripts\Beatmovement.cs" />
+    <Compile Include="Assets\Scripts\Beatmovementtwo.cs" />
     <Compile Include="Assets\Scripts\Behaviours\Enemies\Attack\EnemyMelee.cs" />
     <Compile Include="Assets\Scripts\Behaviours\Enemies\Attack\EnemyRanged.cs" />
     <Compile Include="Assets\Scripts\Behaviours\Enemies\Attack\EnemyTelegraphs.cs" />
@@ -241,6 +242,8 @@
     <Compile Include="Assets\Scripts\MouseOver.cs" />
     <Compile Include="Assets\Scripts\QuitOnClick.cs" />
     <Compile Include="Assets\Scripts\RTII.cs" />
+    <Compile Include="Assets\Scripts\RTII\UnityProject\Assets\Arduino.cs" />
+    <Compile Include="Assets\Scripts\RTII\UnityProject\Assets\ArduinoLogger.cs" />
     <Compile Include="Assets\Scripts\SimpleMapGridCreation.cs" />
     <Compile Include="Assets\Scripts\UIOutline.cs" />
   </ItemGroup>
@@ -387,6 +390,8 @@
     <None Include="Assets\3rd Party\2DxFX\Resources\_2dxFX_Waterfall.shader" />
     <None Include="Assets\3rd Party\2DxFX\Resources\_2dxFX_Wave.shader" />
     <None Include="Assets\3rd Party\2DxFX\Resources\_2dxFX_WoodFX.shader" />
+    <None Include="Assets\Scripts\RTII\ArduinoProject\ButtonDebounce\keywords.txt" />
+    <None Include="Assets\Scripts\RTII\UnityProject\ProjectSettings\ProjectVersion.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\SyntaxTree\UnityVS\2015\UnityVS.CSharp.targets" />
 </Project>
