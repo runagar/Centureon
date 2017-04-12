@@ -221,6 +221,7 @@
     <Compile Include="Assets\3rd Party\2DxFX\Scripts\_2dxFX_Wave.cs" />
     <Compile Include="Assets\3rd Party\2DxFX\Scripts\_2dxFX_WoodFX.cs" />
     <Compile Include="Assets\Prefabs\placeholder.cs" />
+    <Compile Include="Assets\Scripts\Beatmovement.cs" />
     <Compile Include="Assets\Scripts\Behaviours\Enemies\Attack\EnemyMelee.cs" />
     <Compile Include="Assets\Scripts\Behaviours\Enemies\Attack\EnemyRanged.cs" />
     <Compile Include="Assets\Scripts\Behaviours\Enemies\Attack\EnemyTelegraphs.cs" />
@@ -231,6 +232,7 @@
     <Compile Include="Assets\Scripts\Behaviours\Player\PlayerStats.cs" />
     <Compile Include="Assets\Scripts\Behaviours\Projectiles\Projectile.cs" />
     <Compile Include="Assets\Scripts\Billboard.cs" />
+    <Compile Include="Assets\Scripts\LoadSceneOnClick.cs" />
     <Compile Include="Assets\Scripts\Management\ProjectileTracker.cs" />
     <Compile Include="Assets\Scripts\Management\Spawner.cs" />
     <Compile Include="Assets\Scripts\Management\TurnTracker.cs" />

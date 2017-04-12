@@ -91,11 +91,16 @@ public class BaseMovement : MonoBehaviour {
         }
 
         //Move the enemy by the path.
-        if (movementVector.x == -1 || movementVector.z == -1)
+        /*if (movementVector.x == -1 || movementVector.z == -1)
+        {
             mySpriteRenderer.flipX = true;
+            if (stats.range == 2) mySpriteRenderer.transform.position = new Vector3(-0.6f, 1.5f, 0);
+        }
         else
+        {
             mySpriteRenderer.flipX = false;
-
+            if (stats.range == 2) mySpriteRenderer.transform.position = new Vector3(0.6f, 1.5f, 0);
+        }*/
         transform.position += movementVector;
     }
 
