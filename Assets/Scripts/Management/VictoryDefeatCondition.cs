@@ -44,7 +44,7 @@ public class VictoryDefeatCondition : MonoBehaviour {
     public void reload()
     {
         int scene = SceneManager.GetActiveScene().buildIndex;
-        SceneManager.LoadScene(scene, LoadSceneMode.Single);
+        SceneManager.LoadScene(0, LoadSceneMode.Single);
         Time.timeScale = 1;
         didPlayerMove = false;
     }

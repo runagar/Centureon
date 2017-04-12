@@ -23,7 +23,7 @@ public class Beatmovement : MonoBehaviour
 	}
 	IEnumerator ToggleRenderer()
 	{
-		yield return new WaitForSeconds(0.66f);
+		yield return new WaitForSeconds(0.65f);
 		this.gameObject.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("MeleeOne kneeling");
 
 		//playaudio();

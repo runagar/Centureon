@@ -30,7 +30,7 @@ public class TurnTracker : MonoBehaviour {
                     gridScript.tiles[i, j].GetComponent<Renderer>().material.color = baseColour;
             }
         }
-        projectiles.MoveProjectiles();      
+        //projectiles.MoveProjectiles();      
         EnemiesTakeTurns();
     }
 

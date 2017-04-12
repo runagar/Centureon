@@ -24,29 +24,31 @@ public class Spawner : MonoBehaviour {
         currentLevel = GameObject.Find("LevelManager").GetComponent<levelManager>().getCurrentLevel();
 
         if (currentLevel == 0){
-            Instantiate(player, new Vector3(0, 0.25f, 0), Quaternion.identity, turnTracker.transform);
+            Instantiate(player, new Vector3(4, 0.25f, 4), Quaternion.identity, turnTracker.transform);
             Instantiate(swordEnemy, new Vector3(9, 0.25f, 2), Quaternion.identity, turnTracker.transform);
             Instantiate(swordEnemy, new Vector3(3, 0.25f, 7), Quaternion.identity, turnTracker.transform);
             Instantiate(swordEnemy, new Vector3(8, 0.25f, 7), Quaternion.identity, turnTracker.transform);
-            Instantiate(swordEnemy, new Vector3(5, 0.25f, 5), Quaternion.identity, turnTracker.transform);
+            Instantiate(swordEnemy, new Vector3(3, 0.25f, 1), Quaternion.identity, turnTracker.transform);
+            Instantiate(swordEnemy, new Vector3(0, 0.25f, 0), Quaternion.identity, turnTracker.transform);
+
         }
         else if (currentLevel == 1){
-            Instantiate(player, new Vector3(0, 0.25f, 0), Quaternion.identity, turnTracker.transform);
+            Instantiate(player, new Vector3(3, 0.25f, 7), Quaternion.identity, turnTracker.transform);
             Instantiate(swordEnemy, new Vector3(9, 0.25f, 2), Quaternion.identity, turnTracker.transform);
-            Instantiate(swordEnemy, new Vector3(3, 0.25f, 7), Quaternion.identity, turnTracker.transform);
+            Instantiate(swordEnemy, new Vector3(0, 0.25f, 1), Quaternion.identity, turnTracker.transform);
             Instantiate(spearEnemy, new Vector3(8, 0.25f, 5), Quaternion.identity, turnTracker.transform);
             Instantiate(spearEnemy, new Vector3(4, 0.25f, 2), Quaternion.identity, turnTracker.transform);
             Instantiate(swordEnemy, new Vector3(0, 0.25f, 6), Quaternion.identity, turnTracker.transform);
             Instantiate(spearEnemy, new Vector3(6, 0.25f, 0), Quaternion.identity, turnTracker.transform);
         }
         else{
-            Instantiate(player, new Vector3(0, 0.25f, 0), Quaternion.identity, turnTracker.transform);
+            Instantiate(player, new Vector3(5, 0.25f, 5), Quaternion.identity, turnTracker.transform);
             Instantiate(spearEnemy, new Vector3(0, 0.25f, 9), Quaternion.identity, turnTracker.transform);
             Instantiate(spearEnemy, new Vector3(6, 0.25f, 7), Quaternion.identity, turnTracker.transform);
             Instantiate(spearEnemy, new Vector3(9, 0.25f, 2), Quaternion.identity, turnTracker.transform);
-            Instantiate(spearEnemy, new Vector3(5, 0.25f, 3), Quaternion.identity, turnTracker.transform);
+            Instantiate(spearEnemy, new Vector3(6, 0.25f, 1), Quaternion.identity, turnTracker.transform);
             Instantiate(spearEnemy, new Vector3(1, 0.25f, 4), Quaternion.identity, turnTracker.transform);
-            Instantiate(spearEnemy, new Vector3(4, 0.25f, 0), Quaternion.identity, turnTracker.transform);
+            Instantiate(spearEnemy, new Vector3(2, 0.25f, 0), Quaternion.identity, turnTracker.transform);
             Instantiate(spearEnemy, new Vector3(8, 0.25f, 5), Quaternion.identity, turnTracker.transform);
             Instantiate(spearEnemy, new Vector3(3, 0.25f, 7), Quaternion.identity, turnTracker.transform);
         }

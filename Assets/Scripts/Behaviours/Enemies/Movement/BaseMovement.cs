@@ -90,17 +90,6 @@ public class BaseMovement : MonoBehaviour {
             movementVector = new Vector3(tempMovement.x, 0, tempMovement.y) - transform.position;
         }
 
-        //Move the enemy by the path.
-        /*if (movementVector.x == -1 || movementVector.z == -1)
-        {
-            mySpriteRenderer.flipX = true;
-            if (stats.range == 2) mySpriteRenderer.transform.position = new Vector3(-0.6f, 1.5f, 0);
-        }
-        else
-        {
-            mySpriteRenderer.flipX = false;
-            if (stats.range == 2) mySpriteRenderer.transform.position = new Vector3(0.6f, 1.5f, 0);
-        }*/
         transform.position += new Vector3(movementVector.x, 0, movementVector.z);
     }
 
@@ -145,7 +134,8 @@ public class BaseMovement : MonoBehaviour {
 						//based on the range of the unit, go through all the relevant tiles and check if they are blocked.
 						for (int r = 0; r < attackRange; r++)
 						{
-                            if ((r+1)*i >= 0 && (r + 1) * i < gridScript.mapSizeX && (r + 1) * j >= 0 && (r + 1) * j < gridScript.mapSizeY)
+                            if ((int)transform.position.x + (r+1)*i >= 0 && (int)transform.position.x + (r + 1) * i < gridScript.mapSizeX &&
+                                (int)transform.position.z + (r + 1) * j >= 0 && (int)transform.position.z + (r + 1) * j < gridScript.mapSizeY)
                             {
                                 if (gridScript.map[(int)transform.position.z, (int)transform.position.x + (r + 1) * i] != 0 && xBlocked == 0) xBlocked = r + 1;
                                 if (gridScript.map[(int)transform.position.z + (r + 1) * j, (int)transform.position.x] != 0 && zBlocked == 0) zBlocked = r + 1;
