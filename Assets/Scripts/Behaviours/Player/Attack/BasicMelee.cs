@@ -5,13 +5,17 @@ using UnityEngine;
 public class BasicMelee : MonoBehaviour {
     TurnTracker turnTracker;
     float timeSinceLastMove;
+	private AudioSource audio;
+	public AudioClip death;
 
     PlayerStats stats;
 
     // Use this for initialization
     void Start()
     {
-        turnTracker = this.GetComponentInParent<TurnTracker>();
+		audio = this.GetComponent<AudioSource>();
+		audio.clip = death;
+		turnTracker = this.GetComponentInParent<TurnTracker>();
         timeSinceLastMove = 0;
 
         stats = this.gameObject.GetComponent<PlayerStats>();
@@ -26,7 +30,8 @@ public class BasicMelee : MonoBehaviour {
             {
                 if(turnTracker.enemies[i] != null && turnTracker.enemies[i].transform.position.z == transform.position.z + 1 && turnTracker.enemies[i].transform.position.x == transform.position.x)
                 {
-                    turnTracker.enemies[i].GetComponent<UnitStats>().isKill = "yes";
+					audio.Play();
+					turnTracker.enemies[i].GetComponent<UnitStats>().isKill = "yes";
                     Destroy(turnTracker.enemies[i]);
                     turnTracker.enemies[i] = null;
                     turnTracker.PlayerTakeTurn();
@@ -40,6 +45,7 @@ public class BasicMelee : MonoBehaviour {
             {
                 if (turnTracker.enemies[i] != null && turnTracker.enemies[i].transform.position.z == transform.position.z - 1 && turnTracker.enemies[i].transform.position.x == transform.position.x)
                 {
+					audio.Play();
                     turnTracker.enemies[i].GetComponent<UnitStats>().isKill = "yes";
                     Destroy(turnTracker.enemies[i]);
                     turnTracker.enemies[i] = null;
@@ -54,6 +60,7 @@ public class BasicMelee : MonoBehaviour {
             {
                 if (turnTracker.enemies[i] != null && turnTracker.enemies[i].transform.position.x == transform.position.x - 1 && turnTracker.enemies[i].transform.position.z == transform.position.z)
                 {
+					audio.Play();
                     turnTracker.enemies[i].GetComponent<UnitStats>().isKill = "yes";
                     Destroy(turnTracker.enemies[i]);
                     turnTracker.enemies[i] = null;
@@ -68,6 +75,7 @@ public class BasicMelee : MonoBehaviour {
             {
                 if (turnTracker.enemies[i] != null && turnTracker.enemies[i].transform.position.x == transform.position.x + 1 && turnTracker.enemies[i].transform.position.z == transform.position.z)
                 {
+					audio.Play();
                     turnTracker.enemies[i].GetComponent<UnitStats>().isKill = "yes";
                     Destroy(turnTracker.enemies[i]);
                     turnTracker.enemies[i] = null;
