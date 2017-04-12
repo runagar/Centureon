@@ -7,12 +7,12 @@ public class VictoryDefeatCondition : MonoBehaviour {
 
     TurnTracker turntracker;
     GameObject player;
-    int currentIndex;
+   	public int currentIndex;
     public bool didPlayerMove;
     // Use this for initialization
     void Start () {
         turntracker = GameObject.Find("TurnTracker").GetComponent<TurnTracker>();
-        currentIndex = this.GetComponent<levelManager>().getCurrentLevel();
+      //  currentIndex = this.GetComponent<levelManager>().getCurrentLevel();
         didPlayerMove = false;
         player = GameObject.FindGameObjectWithTag("PLAYER");
     }
@@ -32,11 +32,12 @@ public class VictoryDefeatCondition : MonoBehaviour {
         {
             Debug.Log("victory");
             //victory
-            if (currentIndex == 2){
-                SceneManager.LoadScene(0);
+            if (currentIndex == 5){
+                SceneManager.LoadScene("mainMenu");
             }
             else {
-                SceneManager.LoadScene(currentIndex + 1);
+				currentIndex+=1;
+                SceneManager.LoadScene(currentIndex);
             }
         }
 	}
@@ -44,7 +45,7 @@ public class VictoryDefeatCondition : MonoBehaviour {
     public void reload()
     {
         int scene = SceneManager.GetActiveScene().buildIndex;
-        SceneManager.LoadScene(0, LoadSceneMode.Single);
+        SceneManager.LoadScene("mainMenu");
         Time.timeScale = 1;
         didPlayerMove = false;
     }

@@ -60,8 +60,7 @@ public class EnemyMelee : MonoBehaviour {
                 if (v.x == playerPos.x && v.y == playerPos.y)
                 {
 					audio.Play();
-						Destroy(player.gameObject);
-					if (audio.isPlaying)
+					Destroy(player.gameObject);
 					break;
                 }  
             }
