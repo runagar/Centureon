@@ -233,6 +233,7 @@
     <Compile Include="Assets\Scripts\Behaviours\Player\PlayerStats.cs" />
     <Compile Include="Assets\Scripts\Behaviours\Projectiles\Projectile.cs" />
     <Compile Include="Assets\Scripts\Billboard.cs" />
+    <Compile Include="Assets\Scripts\Dummy.cs" />
     <Compile Include="Assets\Scripts\LoadSceneOnClick.cs" />
     <Compile Include="Assets\Scripts\Management\ProjectileTracker.cs" />
     <Compile Include="Assets\Scripts\Management\Spawner.cs" />
@@ -245,6 +246,7 @@
     <Compile Include="Assets\Scripts\RTII\UnityProject\Assets\Arduino.cs" />
     <Compile Include="Assets\Scripts\RTII\UnityProject\Assets\ArduinoLogger.cs" />
     <Compile Include="Assets\Scripts\SimpleMapGridCreation.cs" />
+    <Compile Include="Assets\Scripts\Tutorial.cs" />
     <Compile Include="Assets\Scripts\UIOutline.cs" />
   </ItemGroup>
   <ItemGroup>
