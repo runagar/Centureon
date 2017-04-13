@@ -7,8 +7,8 @@ public class SimpleMapGridCreation : MonoBehaviour {
     public GameObject pillarObstacle;
     public GameObject pits;
 	public Material pit;
-	Shader shaderPit;
-
+	GameObject info;
+	LoadSceneOnClick levelindex;
     levelManager lvlManager;
     GameObject[,] environmentObjects;
     //tiles can be removed as it is only being used for testing
@@ -58,6 +58,7 @@ public class SimpleMapGridCreation : MonoBehaviour {
     };
 
     void Start(){
+		info = GameObject.Find("Canvas");
         lvlManager = GameObject.Find("LevelManager").GetComponent<levelManager>();
         int currentLevel = lvlManager.getCurrentLevel();
         if(currentLevel == 0) map = map1;
@@ -69,7 +70,13 @@ public class SimpleMapGridCreation : MonoBehaviour {
         tiles = new GameObject[mapSizeX, mapSizeY];
         generateMapGridWithObstacles();
     }
-
+	void Update() { 
+	if (lvlManager.currentLevel == 0) {
+			if (Input.anyKey)
+				info.SetActive(false);
+		}
+			
+	}
     void generateMapGridWithObstacles()
     {
         for (int y = 0; y < mapSizeY; y++){
