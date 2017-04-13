@@ -46,6 +46,7 @@ public class Arduino : MonoBehaviour {
     // Use this for initialization
     void Start () {
         OpenPort(); //Open the serial port when the scene is loaded.
+        DontDestroyOnLoad(this.gameObject);
     }
 	
 	// My Arduino script uses coroutines instead of Update, to enable faster serial communication than the frame rate

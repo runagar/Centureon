@@ -12,11 +12,19 @@ public class RTII : MonoBehaviour {
     private float _rotationSensitivity;
     public float deltaSideWays, deltaFrontWays;
 
+    Arduino arduino;
+
     void Start () {
-        _rotationSensitivity = 0.001f;
+        _rotationSensitivity = 0.005f;
+        arduino = GameObject.Find("Logger").GetComponent<Arduino>();
 	}
 	
 	void Update () {
+
+        _frontLeftLeg = arduino.FSR_FL;
+        _frontRigthLeg = arduino.FSR_FR;
+        _backLeftLeg = arduino.FSR_RL;
+        _backRightLeg = arduino.FSR_RR;
 
         if (_frontLeftLeg < 0) _frontLeftLeg = 0;
         if (_frontRigthLeg < 0) _frontRigthLeg = 0;
@@ -28,14 +36,14 @@ public class RTII : MonoBehaviour {
         _rotation = Vector3.zero;
 
         //determines which side the user is leaning to
-        if (Mathf.Abs(deltaSideWays) > 50)
+        if (Mathf.Abs(deltaSideWays) > 10)
         {
             _rotation.y += deltaSideWays * _rotationSensitivity;
             transform.Rotate(Vector3.up * _rotation.y);
         }
 
         //determines if the user is leaning forward or backwards.
-        if (Mathf.Abs(deltaFrontWays) > 50)
+        if (Mathf.Abs(deltaFrontWays) > 10)
         {
             _rotation.x += deltaFrontWays * _rotationSensitivity;
             transform.Rotate(Vector3.right * _rotation.x);
