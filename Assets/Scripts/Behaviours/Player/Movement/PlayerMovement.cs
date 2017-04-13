@@ -56,7 +56,7 @@ public class PlayerMovement : MonoBehaviour
             case "z1":
                 foreach(GameObject o in turnTracker.enemies)
                 {
-                    if (o != null && o.transform.position == transform.position + new Vector3(0, -0.25f, 1))
+                    if (o != null && o.transform.position == transform.position + new Vector3(0, 0, 1))
                     {
                         enemyInTheWay = true;
                         break;
@@ -77,7 +77,7 @@ public class PlayerMovement : MonoBehaviour
             case "z-1":
                 foreach (GameObject o in turnTracker.enemies)
                 {
-                    if (o != null && o.transform.position == transform.position + new Vector3(0, -0.25f, -1))
+                    if (o != null && o.transform.position == transform.position + new Vector3(0, 0, -1))
                     {
                         enemyInTheWay = true;
                         break;
@@ -97,7 +97,7 @@ public class PlayerMovement : MonoBehaviour
             case "x-1":
                 foreach (GameObject o in turnTracker.enemies)
                 {
-                    if (o != null && o.transform.position == transform.position + new Vector3(-1, -0.25f, 0))
+                    if (o != null && o.transform.position == transform.position + new Vector3(-1, 0, 0))
                     {
                         enemyInTheWay = true;
                         break;
@@ -118,7 +118,7 @@ public class PlayerMovement : MonoBehaviour
             case "x1":
                 foreach (GameObject o in turnTracker.enemies)
                 {
-                    if (o != null && o.transform.position == transform.position + new Vector3(1, -0.25f, 0))
+                    if (o != null && o.transform.position == transform.position + new Vector3(1, 0, 0))
                     {
                         enemyInTheWay = true;
                         break;
