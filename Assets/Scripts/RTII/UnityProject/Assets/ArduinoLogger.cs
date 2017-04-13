@@ -9,13 +9,13 @@ public class ArduinoLogger : MonoBehaviour
     public string FileName = "Arduino Log";
     public string FileFormat = ".tsv";
     public string path = "";
-	private string header = "UnityMillis\tArduinoMillis\tEDA\tIBI\tDistance\tFSR1\tFSR2\tFSR3\tFSR4";
+	private string header = "UnityMillis\tArduinoMillis\tEDA\tIBI\tDistance\tFL\tFR\tRL\tRR";
 
     private StreamWriter fileWriter;
 
     public bool MatchFittsLawLogging = true;
     private bool _MatchFittsLawLogging;
-	private string AltHeader = "Date;Time;ArduinoMillis;EDA;IBI;RawPulse;FSR1;FRS2;FSR3;FSR4";
+	private string AltHeader = "Date;Time;ArduinoMillis;EDA;IBI;RawPulse;FL;FR;RL;RR";
     public string AltFileFormat = ".csv";
 
     // Use this for initialization
