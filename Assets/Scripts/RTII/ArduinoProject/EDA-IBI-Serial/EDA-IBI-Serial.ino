@@ -1,3 +1,10 @@
+#include <FilterDerivative.h>
+#include <FilterOnePole.h>
+#include <Filters.h>
+#include <FilterTwoPole.h>
+#include <FloatDefine.h>
+#include <RunningStatistics.h>
+
 #include "PatternPlayer.h"
 
 //Output variables
@@ -9,6 +16,9 @@ int FSRValue2 = 0;
 int FSRValue3 = 0;
 int FSRValue4 = 0;
 
+//Lowpass filter frequency. Changes in hz faster than this is filtered out
+float lowPassFrequency = 5;
+FilterOnePole lowpassFilter(LOWPASS, lowPassFrequency);
 
 
 //Sensor Variables
@@ -108,7 +118,7 @@ void loop() {
 
 void ReadSensors()
 {
-  EDA = analogRead(EDAPin); //Read the raw 
+  EDA = lowpassFilter.input(analogRead(EDAPin)); //Read the raw 
 
 FSRValue = analogRead(FRSPin);
 FSRValue2= analogRead(FRSPin2);
