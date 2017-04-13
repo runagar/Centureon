@@ -198,14 +198,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cffdf6465359348909fe6874bb010e9b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!21 &320950102
+--- !u!21 &303056422
 Material:
   serializedVersion: 6
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: 2DxFX/Standard/Heat
-  m_Shader: {fileID: 4800000, guid: 02312673b6ee40648a0ac2f6db9ffe28, type: 3}
+  m_Name: 2DxFX/Standard/Jelly
+  m_Shader: {fileID: 4800000, guid: ad8b56bc4cc5ab940847444fa9dd2a2d, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 5
   m_CustomRenderQueue: -1
@@ -228,10 +228,16 @@ Material:
       second: 15
     - first:
         name: _Distortion
-      second: 0.16
+      second: 0.44
+    - first:
+        name: _Inside
+      second: 1.1
+    - first:
+        name: _RandomPos
+      second: 0
     - first:
         name: _Speed
-      second: 1
+      second: 0.23
     - first:
         name: _Stencil
       second: 0
@@ -646,7 +652,7 @@ MonoBehaviour:
   m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Material: {fileID: 320950102}
+  m_Material: {fileID: 303056422}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
@@ -676,14 +682,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 1592498761}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9216f4853d238c14e871cacfd736a097, type: 3}
+  m_Script: {fileID: 11500000, guid: 2608538603b69444a80e635b58eccee7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   ForceMaterial: {fileID: 0}
   ActiveChange: 1
   _Alpha: 1
-  Heat: 0.16
-  Speed: 1
+  Heat: 0.44
+  Inside: 1.1
+  Speed: 0.23
   ShaderChange: 0
 --- !u!1001 &1670854619
 Prefab:
