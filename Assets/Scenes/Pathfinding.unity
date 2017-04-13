@@ -198,7 +198,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cffdf6465359348909fe6874bb010e9b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!21 &367126938
+--- !u!21 &401058960
 Material:
   serializedVersion: 6
   m_ObjectHideFlags: 0
@@ -329,7 +329,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4219507026906374, guid: 76d1312ce0392524a87803b7d6a12ce5, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 4219507026906374, guid: 76d1312ce0392524a87803b7d6a12ce5, type: 2}
       propertyPath: m_LocalPosition.y
@@ -337,7 +337,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4219507026906374, guid: 76d1312ce0392524a87803b7d6a12ce5, type: 2}
       propertyPath: m_LocalPosition.z
-      value: 8
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 4219507026906374, guid: 76d1312ce0392524a87803b7d6a12ce5, type: 2}
       propertyPath: m_LocalRotation.x
@@ -652,7 +652,7 @@ MonoBehaviour:
   m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Material: {fileID: 367126938}
+  m_Material: {fileID: 401058960}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
