@@ -6,6 +6,9 @@ public class SimpleMapGridCreation : MonoBehaviour {
     public GameObject Tile;
     public GameObject pillarObstacle;
     public GameObject pits;
+	public Material pit;
+	Shader shaderPit;
+
     levelManager lvlManager;
     GameObject[,] environmentObjects;
     //tiles can be removed as it is only being used for testing
@@ -65,7 +68,6 @@ public class SimpleMapGridCreation : MonoBehaviour {
         environmentObjects = new GameObject[mapSizeX, mapSizeY];
         tiles = new GameObject[mapSizeX, mapSizeY];
         generateMapGridWithObstacles();
-
     }
 
     void generateMapGridWithObstacles()
@@ -85,8 +87,8 @@ public class SimpleMapGridCreation : MonoBehaviour {
                 {
                     environmentObjects[x, y] = Instantiate(pits, new Vector3(x, 0.05f, y), Quaternion.identity);
                     environmentObjects[x, y].transform.parent = gameObject.transform;
-                    tiles[x, y].GetComponent<Renderer>().material.color = Color.gray;
-                    tiles[x, y].transform.parent = gameObject.transform;
+					tiles[x, y].GetComponent<Renderer>().material = pit;
+					tiles[x, y].transform.parent = gameObject.transform;
                 }
                 if (map[y, x] == 3)
                 {

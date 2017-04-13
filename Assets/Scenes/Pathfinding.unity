@@ -299,6 +299,7 @@ MonoBehaviour:
   pillarObstacle: {fileID: 1210880576924822, guid: 77a903e3bdbc48a4da80d61a0dee55eb,
     type: 2}
   pits: {fileID: 1182875824052862, guid: 81d2e32410d16de44b00a1628bebb378, type: 2}
+  pit: {fileID: 2100000, guid: 3f955c2b006a64afb97b8a785d8e26e4, type: 2}
   mapSizeX: 10
   mapSizeY: 10
 --- !u!4 &1223199349
