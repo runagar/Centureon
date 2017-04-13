@@ -25,10 +25,6 @@ public class ArduinoLogger : MonoBehaviour
 
         if (path == "")
         {
-
-            if (_MatchFittsLawLogging)
-                path = Application.persistentDataPath + "/Data/Arduino/";
-            else
                 path = Application.dataPath + "/logs/";
         }
 

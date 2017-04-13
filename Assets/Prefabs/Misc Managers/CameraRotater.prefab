@@ -167,7 +167,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c912df79b82a045488add9b59f15e38c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PortName: /dev/cu.usbmodem1421
+  PortName: COM3
   BaudRate: 115200
   StartFlag: 35
   PollingRate: 100
@@ -181,10 +181,10 @@ MonoBehaviour:
   RawEDA: 0
   IBI: 0
   RawPulse: 0
-  FSRValue: 0
-  FSRValue2: 0
-  FSRValue3: 0
-  FSRValue4: 0
+  FSR_FL: 0
+  FSR_FR: 0
+  FSR_RL: 0
+  FSR_RR: 0
 --- !u!124 &124799078047854704
 Behaviour:
   m_ObjectHideFlags: 1

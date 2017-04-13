@@ -35,10 +35,10 @@ public class Arduino : MonoBehaviour {
     public int RawEDA = 0;
     public int IBI = 0;
     public int RawPulse = 0;
-	public int FSRValue = 0;
-	public int FSRValue2 = 0;
-	public int FSRValue3 = 0;
-	public int FSRValue4 = 0;
+	public int FSR_FL = 0;
+	public int FSR_FR = 0;
+	public int FSR_RL = 0;
+	public int FSR_RR = 0;
     //Event handler
     public delegate void NewDataEventHandler(Arduino arduino);
     public static event NewDataEventHandler NewDataEvent;
@@ -74,10 +74,10 @@ public class Arduino : MonoBehaviour {
         if (tmpIBI > 0)
             IBI = tmpIBI;
         RawPulse = int.Parse(values[3]);
-		FSRValue = int.Parse(values[4]);
-		FSRValue2 = int.Parse(values[5]);
-		FSRValue3 = int.Parse(values[6]);
-		FSRValue4 = int.Parse(values[7]);
+		FSR_FL = int.Parse(values[4]);
+		FSR_FR = int.Parse(values[5]);
+		FSR_RL = int.Parse(values[6]);
+		FSR_RR = int.Parse(values[7]);
         //Feel free to add new variables (both here and in the Arduino script).
 
 
