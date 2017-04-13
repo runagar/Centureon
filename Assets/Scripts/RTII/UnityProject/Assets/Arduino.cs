@@ -40,14 +40,25 @@ public class Arduino : MonoBehaviour {
 	public int FSR_RL = 0;
 	public int FSR_RR = 0;
     //Event handler
+	Tutorial chek;
     public delegate void NewDataEventHandler(Arduino arduino);
     public static event NewDataEventHandler NewDataEvent;
-
+		
     // Use this for initialization
     void Start () {
+		chek = GameObject.Find("Logger").GetComponent<Tutorial>();
         OpenPort(); //Open the serial port when the scene is loaded.
-        DontDestroyOnLoad(this.gameObject);
+				if (chek.checkker== false)
+		{
+            DontDestroyOnLoad(this.gameObject);
+			chek.checkker = true;
+		}
+		else { }
+	
     }
+	void Awake() {
+
+	}
 	
 	// My Arduino script uses coroutines instead of Update, to enable faster serial communication than the frame rate
 	void Update () {
