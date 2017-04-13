@@ -62,7 +62,7 @@ public class LoadSceneOnClick : MonoBehaviour {
 	void animation() {
 		if (sceneIndex == 0)
 		{
-			if (Input.GetKey(KeyCode.Escape))
+			if (Input.anyKey)
 			{
 				SceneManager.LoadScene("mainMenu");
 			}
