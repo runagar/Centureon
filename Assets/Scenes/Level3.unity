@@ -25,7 +25,7 @@ RenderSettings:
   m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
   m_AmbientIntensity: 1
   m_AmbientMode: 0
-  m_SkyboxMaterial: {fileID: 10304, guid: 0000000000000000f000000000000000, type: 0}
+  m_SkyboxMaterial: {fileID: 2100000, guid: ed4fac67e5c294b9280cd6bbbafb62ef, type: 2}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -300,6 +300,7 @@ MonoBehaviour:
     type: 2}
   pits: {fileID: 1182875824052862, guid: 81d2e32410d16de44b00a1628bebb378, type: 2}
   pit: {fileID: 2100000, guid: 3f955c2b006a64afb97b8a785d8e26e4, type: 2}
+  info: {fileID: 0}
   mapSizeX: 10
   mapSizeY: 10
 --- !u!4 &1223199349
