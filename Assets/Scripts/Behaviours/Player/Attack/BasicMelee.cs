@@ -7,6 +7,7 @@ public class BasicMelee : MonoBehaviour {
     float timeSinceLastMove;
 	private AudioSource audio;
 	public AudioClip death;
+	SimpleMapGridCreation press;
 
     PlayerStats stats;
 
@@ -19,8 +20,12 @@ public class BasicMelee : MonoBehaviour {
         timeSinceLastMove = 0;
 
         stats = this.gameObject.GetComponent<PlayerStats>();
-    }
+		press = GameObject.Find("MapLayout").GetComponent<SimpleMapGridCreation>();
 
+    }
+	void teleport() {
+		
+	}
     // Update is called once per frame
     void Update () {
 

@@ -9,12 +9,15 @@ public class VictoryDefeatCondition : MonoBehaviour {
     GameObject player;
    	public int currentIndex;
     public bool didPlayerMove;
+	SimpleMapGridCreation press;
+
     // Use this for initialization
     void Start () {
         turntracker = GameObject.Find("TurnTracker").GetComponent<TurnTracker>();
       //  currentIndex = this.GetComponent<levelManager>().getCurrentLevel();
         didPlayerMove = false;
         player = GameObject.FindGameObjectWithTag("PLAYER");
+		press = GameObject.Find("MapLayout").GetComponent<SimpleMapGridCreation>();
     }
 	
 	// Update is called once per frame
@@ -29,7 +32,7 @@ public class VictoryDefeatCondition : MonoBehaviour {
 
         }
         if(turntracker.enemies.Length <= 0 && didPlayerMove == true)
-        {
+		{     
             Debug.Log("victory");
             //victory
             if (currentIndex == 5){
