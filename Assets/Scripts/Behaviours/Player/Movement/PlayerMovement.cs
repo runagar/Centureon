@@ -47,6 +47,11 @@ public class PlayerMovement : MonoBehaviour
                 MovePlayerPiece("x1");
 
             }
+            if(Input.GetKeyDown(KeyCode.Space) && timeSinceLastMove > 0.5)
+            {
+                turnTracker.PlayerTakeTurn();
+                turnTracker.PlayerTakeTurn();
+        }
     }
 
     void MovePlayerPiece(string dir)
