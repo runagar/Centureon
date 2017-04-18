@@ -19,8 +19,6 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4743109809713856}
-  - component: {fileID: 114537671535877350}
-  - component: {fileID: 114853148975388310}
   - component: {fileID: 114424810968711446}
   m_Layer: 0
   m_Name: Logger
@@ -54,48 +52,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tutorialcheck: 1
---- !u!114 &114537671535877350
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1691411564006422}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c912df79b82a045488add9b59f15e38c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  PortName: COM3
-  BaudRate: 115200
-  StartFlag: 35
-  PollingRate: 100
-  PackagesLost: 0
-  readTimeouts: 0
-  ParseIncomingData: 1
-  vibrate: 0
-  NewestIncomingData: 
-  NewestOutgoingData: 
-  ArduinoMillis: 0
-  RawEDA: 0
-  IBI: 0
-  RawPulse: 0
-  FSR_FL: 0
-  FSR_FR: 0
-  FSR_RL: 0
-  FSR_RR: 0
---- !u!114 &114853148975388310
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1691411564006422}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 546bb4c65a7af3547869c2fd725d74ca, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  FileName: Arduino Log
-  FileFormat: .tsv
-  path: 
-  MatchFittsLawLogging: 1
-  AltFileFormat: .csv
+  checkker: 0

@@ -11,10 +11,18 @@ public class Tutorial : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		tutorial = GameObject.Find("MapLayout").GetComponent<SimpleMapGridCreation>();
-	}
+
+        
+    }
 	
 	// Update is called once per fame
 	void Update () {
-		
-	}
+        if (checkker == false)
+        {
+            DontDestroyOnLoad(this.gameObject);
+            checkker = true;
+        }
+        else { }
+
+    }
 }

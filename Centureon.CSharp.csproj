@@ -242,9 +242,6 @@
     <Compile Include="Assets\Scripts\Management\levelManager.cs" />
     <Compile Include="Assets\Scripts\MouseOver.cs" />
     <Compile Include="Assets\Scripts\QuitOnClick.cs" />
-    <Compile Include="Assets\Scripts\RTII.cs" />
-    <Compile Include="Assets\Scripts\RTII\UnityProject\Assets\Arduino.cs" />
-    <Compile Include="Assets\Scripts\RTII\UnityProject\Assets\ArduinoLogger.cs" />
     <Compile Include="Assets\Scripts\SimpleMapGridCreation.cs" />
     <Compile Include="Assets\Scripts\Tutorial.cs" />
     <Compile Include="Assets\Scripts\UIOutline.cs" />
@@ -392,8 +389,6 @@
     <None Include="Assets\3rd Party\2DxFX\Resources\_2dxFX_Waterfall.shader" />
     <None Include="Assets\3rd Party\2DxFX\Resources\_2dxFX_Wave.shader" />
     <None Include="Assets\3rd Party\2DxFX\Resources\_2dxFX_WoodFX.shader" />
-    <None Include="Assets\Scripts\RTII\ArduinoProject\ButtonDebounce\keywords.txt" />
-    <None Include="Assets\Scripts\RTII\UnityProject\ProjectSettings\ProjectVersion.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\SyntaxTree\UnityVS\2015\UnityVS.CSharp.targets" />
 </Project>
