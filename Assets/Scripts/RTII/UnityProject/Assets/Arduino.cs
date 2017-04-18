@@ -48,12 +48,9 @@ public class Arduino : MonoBehaviour {
     void Start () {
 		chek = GameObject.Find("Logger").GetComponent<Tutorial>();
         OpenPort(); //Open the serial port when the scene is loaded.
-				if (chek.checkker== false)
-		{
+	
             DontDestroyOnLoad(this.gameObject);
 			chek.checkker = true;
-		}
-		else { }
 	
     }
 	void Awake() {
